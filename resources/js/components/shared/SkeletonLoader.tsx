@@ -4,7 +4,11 @@ type Props = {
     type?: 'table' | 'card' | 'text';
 };
 
-export default function SkeletonLoader({ rows = 5, columns = 4, type = 'table' }: Props) {
+export default function SkeletonLoader({
+    rows = 5,
+    columns = 4,
+    type = 'table',
+}: Props) {
     if (type === 'card') {
         return (
             <div className="row g-3">
@@ -26,7 +30,7 @@ export default function SkeletonLoader({ rows = 5, columns = 4, type = 'table' }
         return (
             <div className="placeholder-glow">
                 {Array.from({ length: rows }).map((_, i) => (
-                    <span key={i} className="placeholder col-12 mb-2 d-block" />
+                    <span key={i} className="placeholder d-block col-12 mb-2" />
                 ))}
             </div>
         );
@@ -48,11 +52,13 @@ export default function SkeletonLoader({ rows = 5, columns = 4, type = 'table' }
                     <tbody>
                         {Array.from({ length: rows }).map((_, ri) => (
                             <tr key={ri}>
-                                {Array.from({ length: columns }).map((_, ci) => (
-                                    <td key={ci}>
-                                        <span className="placeholder col-10" />
-                                    </td>
-                                ))}
+                                {Array.from({ length: columns }).map(
+                                    (_, ci) => (
+                                        <td key={ci}>
+                                            <span className="placeholder col-10" />
+                                        </td>
+                                    ),
+                                )}
                             </tr>
                         ))}
                     </tbody>

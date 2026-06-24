@@ -20,7 +20,10 @@ export default function Page({ account }: Props) {
                     { label: 'Bank', value: account.bank_name },
                     { label: 'Account Number', value: account.account_number },
                     { label: 'Branch', value: account.branch ?? '—' },
-                    { label: 'Current Balance', value: String(account.current_balance ?? 0) },
+                    {
+                        label: 'Current Balance',
+                        value: String(account.current_balance ?? 0),
+                    },
                     { label: 'Status', value: account.status ?? 'active' },
                 ]}
             />

@@ -20,6 +20,7 @@ function idx(title, prop, type, cols, createHref, viewBase) {
     const viewCol = viewBase
         ? `,\n                    { key: 'actions', label: '', render: (row) => <Link href={\`${viewBase}/\${row.id}\`} className="btn btn-sm btn-outline-primary">View</Link> }`
         : '';
+
     return `import { Head, Link } from '@inertiajs/react';
 import DataTable from '@/components/shared/DataTable';
 import PageHeader from '@/components/shared/PageHeader';
@@ -44,10 +45,23 @@ ${colStr}${viewCol}
 function crudForm(title, storeAction, updateAction, entity, fields, cancelHref, extraProps = '') {
     const fieldLines = fields.map((f) => {
         const parts = [`label="${f.l}"`, `name="${f.n}"`];
-        if (f.t) parts.push(`type="${f.t}"`);
-        if (f.req) parts.push('required');
-        if (f.entity) parts.push(`defaultValue={String(${entity}?.${f.n} ?? '')}`);
-        if (f.opts) parts.push(`options={${f.opts}}`);
+
+        if (f.t) {
+parts.push(`type="${f.t}"`);
+}
+
+        if (f.req) {
+parts.push('required');
+}
+
+        if (f.entity) {
+parts.push(`defaultValue={String(${entity}?.${f.n} ?? '')}`);
+}
+
+        if (f.opts) {
+parts.push(`options={${f.opts}}`);
+}
+
         return `                        <FormField ${parts.join(' ')} error={errors.${f.n}} />`;
     }).join('\n');
 
@@ -90,6 +104,7 @@ ${fieldLines}
 
 function show(title, entity, entityType, fields, editHref, deleteHref, backHref) {
     const fieldArr = fields.map((f) => `{ label: '${f.l}', value: ${f.v}${f.fmt ? `, format: '${f.fmt}'` : ''} }`).join(',\n        ');
+
     return `import { Head } from '@inertiajs/react';
 import DetailCard from '@/components/shared/DetailCard';
 import PageHeader from '@/components/shared/PageHeader';
@@ -378,7 +393,10 @@ const portalIndexes = [
     ['portal/shares/index.tsx', 'Shares', 'purchases', 'SharePurchase', [{ k: 'shares', l: 'Shares' }, { k: 'amount', l: 'Amount' }]],
     ['portal/welfare/index.tsx', 'Welfare', 'contributions', 'WelfareContribution', [{ k: 'amount', l: 'Amount' }, { k: 'date', l: 'Date' }]],
 ];
-for (const args of portalIndexes) w(...args);
+
+for (const args of portalIndexes) {
+w(...args);
+}
 
 w('portal/reports/index.tsx', `import { Head, Link } from '@inertiajs/react';
 import PageHeader from '@/components/shared/PageHeader';
@@ -446,6 +464,7 @@ const simpleCrud = [
     ['meetings', 'Meeting', 'meeting', [{ l: 'Title', n: 'title', req: true }, { l: 'Date', n: 'date', t: 'date', req: true }, { l: 'Location', n: 'location' }, { l: 'Agenda', n: 'agenda', t: 'textarea' }]],
     ['bank-accounts', 'BankAccount', 'account', [{ l: 'Name', n: 'name', req: true }, { l: 'Bank', n: 'bank_name', req: true }, { l: 'Account Number', n: 'account_number', req: true }, { l: 'Branch', n: 'branch' }]],
 ];
+
 for (const [slug, type, entity, fields] of simpleCrud) {
     w(`portal/${slug}/create.tsx`, crudForm(`Create ${type}`, `@/routes/portal/${slug}`, null, null, fields.map((f) => ({ ...f, typeImport: type })), `/portal/${slug}`));
     w(`portal/${slug}/edit.tsx`, crudForm(`Edit ${type}`, `@/routes/portal/${slug}`, 'update', entity, fields.map((f) => ({ ...f, entity: true, typeImport: type })), `/portal/${slug}`));

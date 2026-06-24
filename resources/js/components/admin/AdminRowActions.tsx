@@ -20,14 +20,21 @@ export default function AdminRowActions({ editHref, deleteHref }: Props) {
     };
 
     return (
-        <div className="d-flex gap-1 justify-content-end">
+        <div className="d-flex justify-content-end gap-1">
             {editHref && (
-                <Link href={editHref} className="btn btn-sm btn-outline-primary">
+                <Link
+                    href={editHref}
+                    className="btn btn-sm btn-outline-primary"
+                >
                     Edit
                 </Link>
             )}
             {deleteHref && (
-                <button type="button" className="btn btn-sm btn-outline-danger" onClick={handleDelete}>
+                <button
+                    type="button"
+                    className="btn btn-sm btn-outline-danger"
+                    onClick={handleDelete}
+                >
                     Delete
                 </button>
             )}

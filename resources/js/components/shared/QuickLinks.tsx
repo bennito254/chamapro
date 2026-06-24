@@ -19,8 +19,8 @@ const colorClasses: Record<string, string> = {
 export default function QuickLinks({ title = 'Quick Actions', links }: Props) {
     return (
         <div className="card cp-quick-links-card border-0">
-            <div className="card-header bg-transparent border-0 pt-4 pb-0 px-4">
-                <h6 className="fw-semibold mb-0 d-flex align-items-center gap-2">
+            <div className="card-header border-0 bg-transparent px-4 pt-4 pb-0">
+                <h6 className="fw-semibold d-flex align-items-center mb-0 gap-2">
                     <i className="bi bi-lightning-charge-fill text-warning" />
                     {title}
                 </h6>
@@ -28,7 +28,10 @@ export default function QuickLinks({ title = 'Quick Actions', links }: Props) {
             <div className="card-body p-4">
                 <div className="row g-3">
                     {links.map((link) => (
-                        <div key={link.href} className="col-6 col-md-4 col-xl-3">
+                        <div
+                            key={link.href}
+                            className="col-md-4 col-xl-3 col-6"
+                        >
                             <Link
                                 href={link.href}
                                 className={`cp-quick-link ${colorClasses[link.color ?? 'primary']}`}
@@ -37,9 +40,13 @@ export default function QuickLinks({ title = 'Quick Actions', links }: Props) {
                                     <i className={`bi bi-${link.icon}`} />
                                 </span>
                                 <span className="cp-quick-link__content">
-                                    <span className="cp-quick-link__label">{link.label}</span>
+                                    <span className="cp-quick-link__label">
+                                        {link.label}
+                                    </span>
                                     {link.description && (
-                                        <span className="cp-quick-link__desc">{link.description}</span>
+                                        <span className="cp-quick-link__desc">
+                                            {link.description}
+                                        </span>
                                     )}
                                 </span>
                                 <i className="bi bi-arrow-right cp-quick-link__arrow" />

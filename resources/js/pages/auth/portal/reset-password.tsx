@@ -28,13 +28,19 @@ export default function Page({ email, token, status, passwordRules }: Props) {
                 }
             >
                 {status && (
-                    <div className="alert alert-success cp-auth-alert" role="status">
+                    <div
+                        className="alert alert-success cp-auth-alert"
+                        role="status"
+                    >
                         <i className="bi bi-check-circle me-2" />
                         {status}
                     </div>
                 )}
 
-                <Form {...update.form()} resetOnSuccess={['password', 'password_confirmation']}>
+                <Form
+                    {...update.form()}
+                    resetOnSuccess={['password', 'password_confirmation']}
+                >
                     {({ errors, processing }) => (
                         <>
                             <input type="hidden" name="token" value={token} />
@@ -76,7 +82,7 @@ export default function Page({ email, token, status, passwordRules }: Props) {
 
                             <button
                                 type="submit"
-                                className="btn btn-primary w-100 cp-auth-submit mt-1"
+                                className="btn btn-primary cp-auth-submit mt-1 w-100"
                                 disabled={processing}
                             >
                                 {processing ? (

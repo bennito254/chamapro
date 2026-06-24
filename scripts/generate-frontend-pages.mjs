@@ -11,8 +11,9 @@ function writePage(relPath, content) {
     fs.writeFileSync(full, content.trimStart() + '\n');
 }
 
-function indexPage({ title, resource, prop, columns, createHref, showHref }) {
+function indexPage({ title, resource, prop, columns, createHref }) {
     const cols = columns.map((c) => `{ key: '${c.key}', label: '${c.label}'${c.render ? `, render: (row) => ${c.render}` : ''} }`).join(',\n        ');
+
     return `import { Head, Link } from '@inertiajs/react';
 import DataTable from '@/components/shared/DataTable';
 import PageHeader from '@/components/shared/PageHeader';
@@ -41,58 +42,6 @@ export default function Index({ ${prop} }: Props) {
                 ]}
                 data={${prop}}
             />
-        </>
-    );
-}
-`;
-}
-
-function formPage({ title, action, method, fields, cancelHref, submitLabel = 'Save' }) {
-    const fieldJsx = fields.map((f) => {
-        const props = [`label="${f.label}"`, `name="${f.name}"`];
-        if (f.type) props.push(`type="${f.type}"`);
-        if (f.required) props.push('required');
-        if (f.entity) props.push(`defaultValue={${f.entity}?.${f.name}}`);
-        if (f.options) props.push(`options={${f.options}}`);
-        if (f.rows) props.push(`rows={${f.rows}}`);
-        return `                        <FormField ${props.join(' ')} error={errors.${f.name}} />`;
-    }).join('\n');
-
-    return `import { Form, Head, Link } from '@inertiajs/react';
-import FormField from '@/components/shared/FormField';
-import PageHeader from '@/components/shared/PageHeader';
-${action.includes('@/routes') ? `import { ${action.split('.').pop()} } from '${action.split('.').slice(0, -1).join('.') || action}';` : ''}
-
-type Props = {
-    ${fields.find((f) => f.entity) ? `${fields.find((f) => f.entity).entity.replace('?', '')}?: Record<string, unknown>;` : ''}
-    ${fields.filter((f) => f.listProp).map((f) => `${f.listProp}: Array<Record<string, unknown>>;`).join('\n    ')}
-};
-
-export default function FormPage(props: Props) {
-    const { ${[...new Set(fields.filter((f) => f.entity).map((f) => f.entity.replace('?', '')))].join(', ')}, errors, processing } = props as Props & { errors: Record<string, string>; processing?: boolean };
-    ${fields.filter((f) => f.listProp).length ? '' : ''}
-
-    return (
-        <>
-            <Head title="${title}" />
-            <PageHeader title="${title}" />
-            <div className="card border-0 shadow-sm">
-                <div className="card-body">
-                    <Form action="${typeof action === 'string' && !action.startsWith('@') ? action : ''}" method="${method}" className="row g-3">
-                        {({ errors, processing }) => (
-                            <>
-${fieldJsx}
-                                <div className="col-12 d-flex gap-2">
-                                    <button type="submit" className="btn btn-primary" disabled={processing}>
-                                        {processing ? 'Saving...' : '${submitLabel}'}
-                                    </button>
-                                    <Link href="${cancelHref}" className="btn btn-outline-secondary">Cancel</Link>
-                                </div>
-                            </>
-                        )}
-                    </Form>
-                </div>
-            </div>
         </>
     );
 }
@@ -404,11 +353,12 @@ export default function ReportsIndex({ reportTypes }: Props) {
     }
 
     const showCol = showBase ? `, { key: 'id', label: '', render: (r) => <Link href={\`${showBase}/\${r.id}\`} className="btn btn-sm btn-outline-primary">View</Link> }` : '';
-    add(file, indexPage({ title, resource: type, prop, columns: [...columns, ...(showCol ? [{ key: 'actions', label: '', render: showCol.replace(', { key: \'id\', label: \'\', render: ', '').replace(' }', '') }] : [])], createHref, showHref: showBase }));
+    add(file, indexPage({ title, resource: type, prop, columns: [...columns, ...(showCol ? [{ key: 'actions', label: '', render: showCol.replace(', { key: \'id\', label: \'\', render: ', '').replace(' }', '') }] : [])], createHref }));
 }
 
 // Write all pages
 let count = 0;
+
 for (const [rel, content] of pages) {
     writePage(rel, content);
     count++;

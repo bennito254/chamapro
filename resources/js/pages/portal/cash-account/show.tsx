@@ -10,10 +10,16 @@ export default function Page({ account }: Props) {
         <>
             <Head title="Cash Account" />
             <PageHeader title="Cash Account" />
-            <DetailCard title="Details" editHref="undefined" deleteHref="undefined" backHref="/portal/cash-account" fields={[
-        { label: 'Name', value: account.name },
-        { label: 'Balance', value: account.balance }
-            ]} />
+            <DetailCard
+                title="Details"
+                editHref="undefined"
+                deleteHref="undefined"
+                backHref="/portal/cash-account"
+                fields={[
+                    { label: 'Name', value: account.name },
+                    { label: 'Balance', value: account.balance },
+                ]}
+            />
         </>
     );
 }

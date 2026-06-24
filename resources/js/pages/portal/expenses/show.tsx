@@ -10,11 +10,17 @@ export default function Page({ expense }: Props) {
         <>
             <Head title="Expense" />
             <PageHeader title="Expense" />
-            <DetailCard title="Details" editHref={`/portal/expenses/${expense.sqid}/edit`} deleteHref={`/portal/expenses/${expense.sqid}`} backHref="/portal/expenses" fields={[
-        { label: 'Amount', value: expense.amount },
-        { label: 'Date', value: expense.date, format: 'date' },
-        { label: 'Description', value: expense.description }
-            ]} />
+            <DetailCard
+                title="Details"
+                editHref={`/portal/expenses/${expense.sqid}/edit`}
+                deleteHref={`/portal/expenses/${expense.sqid}`}
+                backHref="/portal/expenses"
+                fields={[
+                    { label: 'Amount', value: expense.amount },
+                    { label: 'Date', value: expense.date, format: 'date' },
+                    { label: 'Description', value: expense.description },
+                ]}
+            />
         </>
     );
 }

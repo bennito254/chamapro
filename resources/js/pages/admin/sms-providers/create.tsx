@@ -32,7 +32,12 @@ export default function Page() {
                     <Form {...store.form()}>
                         {({ errors, processing }) => (
                             <>
-                                <FormField label="Name" name="name" required error={errors.name} />
+                                <FormField
+                                    label="Name"
+                                    name="name"
+                                    required
+                                    error={errors.name}
+                                />
                                 <FormField
                                     label="Driver"
                                     name="driver"
@@ -50,7 +55,10 @@ export default function Page() {
                                     error={errors.status}
                                 />
                                 <div className="mb-3">
-                                    <label htmlFor="credentials" className="form-label">
+                                    <label
+                                        htmlFor="credentials"
+                                        className="form-label"
+                                    >
                                         Credentials (JSON)
                                     </label>
                                     <textarea
@@ -61,10 +69,13 @@ export default function Page() {
                                         defaultValue="{}"
                                     />
                                     <div className="form-text">
-                                        Use an empty object for the log driver. Example: {`{"api_key":"..."}`}
+                                        Use an empty object for the log driver.
+                                        Example: {`{"api_key":"..."}`}
                                     </div>
                                     {errors.credentials && (
-                                        <div className="invalid-feedback d-block">{errors.credentials}</div>
+                                        <div className="invalid-feedback d-block">
+                                            {errors.credentials}
+                                        </div>
                                     )}
                                 </div>
                                 <div className="form-check mb-4">
@@ -75,15 +86,27 @@ export default function Page() {
                                         id="is_default"
                                         value="1"
                                     />
-                                    <label className="form-check-label" htmlFor="is_default">
+                                    <label
+                                        className="form-check-label"
+                                        htmlFor="is_default"
+                                    >
                                         Set as default provider
                                     </label>
                                 </div>
                                 <div className="d-flex gap-2">
-                                    <button type="submit" className="btn btn-primary" disabled={processing}>
-                                        {processing ? 'Saving...' : 'Create provider'}
+                                    <button
+                                        type="submit"
+                                        className="btn btn-primary"
+                                        disabled={processing}
+                                    >
+                                        {processing
+                                            ? 'Saving...'
+                                            : 'Create provider'}
                                     </button>
-                                    <Link href={index()} className="btn btn-outline-secondary">
+                                    <Link
+                                        href={index()}
+                                        className="btn btn-outline-secondary"
+                                    >
                                         Cancel
                                     </Link>
                                 </div>

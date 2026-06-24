@@ -1,7 +1,7 @@
 import { Form, Head, Link } from '@inertiajs/react';
 import FormField from '@/components/shared/FormField';
-import { update } from '@/routes/portal/loan-applications';
 import PageHeader from '@/components/shared/PageHeader';
+import { update } from '@/routes/portal/loan-applications';
 import type { LoanApplication, LoanProduct } from '@/types/models';
 
 type MemberOption = {
@@ -45,7 +45,9 @@ export default function Page({ application, members, products }: Props) {
                                     label="Loan product"
                                     name="loan_product_id"
                                     required
-                                    defaultValue={String(application.loan_product_id)}
+                                    defaultValue={String(
+                                        application.loan_product_id,
+                                    )}
                                     options={products.map((p) => ({
                                         value: String(p.id),
                                         label: p.name,
@@ -57,7 +59,9 @@ export default function Page({ application, members, products }: Props) {
                                     name="requested_amount"
                                     type="number"
                                     required
-                                    defaultValue={String(application.requested_amount ?? '')}
+                                    defaultValue={String(
+                                        application.requested_amount ?? '',
+                                    )}
                                     error={errors.requested_amount}
                                 />
                                 <FormField
@@ -65,11 +69,17 @@ export default function Page({ application, members, products }: Props) {
                                     name="purpose"
                                     type="textarea"
                                     required
-                                    defaultValue={String(application.purpose ?? '')}
+                                    defaultValue={String(
+                                        application.purpose ?? '',
+                                    )}
                                     error={errors.purpose}
                                 />
-                                <div className="d-flex gap-2 mt-3">
-                                    <button type="submit" className="btn btn-primary" disabled={processing}>
+                                <div className="d-flex mt-3 gap-2">
+                                    <button
+                                        type="submit"
+                                        className="btn btn-primary"
+                                        disabled={processing}
+                                    >
                                         {processing ? 'Saving...' : 'Save'}
                                     </button>
                                     <Link

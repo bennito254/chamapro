@@ -27,9 +27,12 @@ export default function RenewSubscription({ group, plans, mpesa }: Props) {
                 <div className="col-lg-7">
                     <div className="card border-0 shadow-sm">
                         <div className="card-body">
-                            <h5 className="fw-semibold mb-3">Pay with M-Pesa Express</h5>
-                            <p className="text-muted small mb-4">
-                                Select your plan and enter the M-Pesa number to receive the STK push prompt on your phone.
+                            <h5 className="fw-semibold mb-3">
+                                Pay with M-Pesa Express
+                            </h5>
+                            <p className="small mb-4 text-muted">
+                                Select your plan and enter the M-Pesa number to
+                                receive the STK push prompt on your phone.
                             </p>
 
                             <Form {...store.form()}>
@@ -50,12 +53,22 @@ export default function RenewSubscription({ group, plans, mpesa }: Props) {
                                             name="phone_number"
                                             type="tel"
                                             required
-                                            defaultValue={mpesa.default_phone ?? ''}
+                                            defaultValue={
+                                                mpesa.default_phone ?? ''
+                                            }
                                             placeholder="2547XXXXXXXX"
                                             error={errors.phone_number}
                                         />
-                                        <button type="submit" className="btn btn-primary" disabled={processing || !mpesa.stk_enabled}>
-                                            {processing ? 'Sending request…' : 'Pay with M-Pesa'}
+                                        <button
+                                            type="submit"
+                                            className="btn btn-primary"
+                                            disabled={
+                                                processing || !mpesa.stk_enabled
+                                            }
+                                        >
+                                            {processing
+                                                ? 'Sending request…'
+                                                : 'Pay with M-Pesa'}
                                         </button>
                                     </>
                                 )}
@@ -65,25 +78,38 @@ export default function RenewSubscription({ group, plans, mpesa }: Props) {
                 </div>
 
                 <div className="col-lg-5">
-                    <div className="card border-0 shadow-sm h-100">
+                    <div className="card h-100 border-0 shadow-sm">
                         <div className="card-body">
                             <h6 className="fw-semibold mb-3">How it works</h6>
-                            <ol className="text-muted small ps-3 mb-4">
-                                <li className="mb-2">Choose your subscription plan.</li>
-                                <li className="mb-2">Enter the phone number registered with M-Pesa.</li>
-                                <li className="mb-2">Approve the payment on your phone when prompted.</li>
-                                <li>Your subscription activates immediately after payment.</li>
+                            <ol className="small mb-4 ps-3 text-muted">
+                                <li className="mb-2">
+                                    Choose your subscription plan.
+                                </li>
+                                <li className="mb-2">
+                                    Enter the phone number registered with
+                                    M-Pesa.
+                                </li>
+                                <li className="mb-2">
+                                    Approve the payment on your phone when
+                                    prompted.
+                                </li>
+                                <li>
+                                    Your subscription activates immediately
+                                    after payment.
+                                </li>
                             </ol>
 
                             {!mpesa.stk_enabled && (
                                 <div className="alert alert-warning small mb-0">
-                                    M-Pesa checkout is currently disabled by the platform administrator.
+                                    M-Pesa checkout is currently disabled by the
+                                    platform administrator.
                                 </div>
                             )}
 
                             {mpesa.stub_mode && mpesa.stk_enabled && (
                                 <div className="alert alert-info small mb-0">
-                                    Sandbox/stub mode is active — payments complete instantly without a real STK push.
+                                    Sandbox/stub mode is active — payments
+                                    complete instantly without a real STK push.
                                 </div>
                             )}
                         </div>

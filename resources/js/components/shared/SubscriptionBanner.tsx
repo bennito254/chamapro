@@ -1,4 +1,5 @@
 import { Link } from '@inertiajs/react';
+import { useState } from 'react';
 import type { Subscription } from '@/types/models';
 
 type Props = {
@@ -6,6 +7,8 @@ type Props = {
 };
 
 export default function SubscriptionBanner({ subscription }: Props) {
+    const [now] = useState(() => Date.now());
+
     if (!subscription) {
         return null;
     }
@@ -15,7 +18,8 @@ export default function SubscriptionBanner({ subscription }: Props) {
     const isTrialEnding =
         subscription.status === 'trial' &&
         subscription.end_date &&
-        new Date(subscription.end_date) < new Date(Date.now() + 7 * 24 * 60 * 60 * 1000);
+        new Date(subscription.end_date) <
+            new Date(now + 7 * 24 * 60 * 60 * 1000);
 
     if (!isExpired && !isSuspended && !isTrialEnding) {
         return null;
@@ -29,12 +33,18 @@ export default function SubscriptionBanner({ subscription }: Props) {
           : 'Your trial is ending soon. Renew your subscription to avoid interruption.';
 
     return (
-        <div className={`alert alert-${variant} d-flex align-items-center justify-content-between mb-4`} role="alert">
+        <div
+            className={`alert alert-${variant} d-flex align-items-center justify-content-between mb-4`}
+            role="alert"
+        >
             <div>
                 <i className="bi bi-exclamation-triangle-fill me-2" />
                 {message}
             </div>
-            <Link href="/portal/subscription/renew" className={`btn btn-sm btn-${variant}`}>
+            <Link
+                href="/portal/subscription/renew"
+                className={`btn btn-sm btn-${variant}`}
+            >
                 Renew Now
             </Link>
         </div>

@@ -1,8 +1,12 @@
 import { Form, Head, Link } from '@inertiajs/react';
 import FormField from '@/components/shared/FormField';
-import { amountTypeOptions, contributionFrequencyOptions, statusOptions } from '@/lib/form-options';
-import { store } from '@/routes/portal/contribution-types';
 import PageHeader from '@/components/shared/PageHeader';
+import {
+    amountTypeOptions,
+    contributionFrequencyOptions,
+    statusOptions,
+} from '@/lib/form-options';
+import { store } from '@/routes/portal/contribution-types';
 
 export default function Page() {
     const route = store.form();
@@ -16,8 +20,18 @@ export default function Page() {
                     <Form {...route}>
                         {({ errors, processing }) => (
                             <>
-                                <FormField label="Name" name="name" required error={errors.name} />
-                                <FormField label="Description" name="description" type="textarea" error={errors.description} />
+                                <FormField
+                                    label="Name"
+                                    name="name"
+                                    required
+                                    error={errors.name}
+                                />
+                                <FormField
+                                    label="Description"
+                                    name="description"
+                                    type="textarea"
+                                    error={errors.description}
+                                />
                                 <FormField
                                     label="Default Amount"
                                     name="default_amount"
@@ -49,7 +63,11 @@ export default function Page() {
                                     options={statusOptions}
                                     error={errors.status}
                                 />
-                                <input type="hidden" name="save_to_bank" value="0" />
+                                <input
+                                    type="hidden"
+                                    name="save_to_bank"
+                                    value="0"
+                                />
                                 <div className="form-check mb-3">
                                     <input
                                         className="form-check-input"
@@ -59,18 +77,30 @@ export default function Page() {
                                         id="save_to_bank"
                                         defaultChecked
                                     />
-                                    <label className="form-check-label" htmlFor="save_to_bank">
+                                    <label
+                                        className="form-check-label"
+                                        htmlFor="save_to_bank"
+                                    >
                                         Save to bank (available for loans)
                                     </label>
                                     <div className="form-text">
-                                        When enabled, contributions of this type are deposited to the group bank account and count toward the loan fund.
+                                        When enabled, contributions of this type
+                                        are deposited to the group bank account
+                                        and count toward the loan fund.
                                     </div>
                                 </div>
-                                <div className="d-flex gap-2 mt-3">
-                                    <button type="submit" className="btn btn-primary" disabled={processing}>
+                                <div className="d-flex mt-3 gap-2">
+                                    <button
+                                        type="submit"
+                                        className="btn btn-primary"
+                                        disabled={processing}
+                                    >
                                         {processing ? 'Saving...' : 'Save'}
                                     </button>
-                                    <Link href="/portal/contribution-types" className="btn btn-outline-secondary">
+                                    <Link
+                                        href="/portal/contribution-types"
+                                        className="btn btn-outline-secondary"
+                                    >
                                         Cancel
                                     </Link>
                                 </div>

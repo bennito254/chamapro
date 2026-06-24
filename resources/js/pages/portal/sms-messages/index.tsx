@@ -2,8 +2,8 @@ import { Head, Link, usePage } from '@inertiajs/react';
 import DataTable from '@/components/shared/DataTable';
 import PageHeader from '@/components/shared/PageHeader';
 import { formatDateTime } from '@/lib/format';
-import type { Paginated } from '@/types/pagination';
 import type { Member, SmsMessage, SmsTemplate, User } from '@/types/models';
+import type { Paginated } from '@/types/pagination';
 
 type MessageRow = SmsMessage & {
     member?: Member | null;
@@ -22,12 +22,17 @@ export default function Page({ messages }: Props) {
             <Head title="SMS Messages" />
             <PageHeader
                 title="SMS Messages"
-                actions={canSend ? (
-                    <Link href="/portal/sms-messages/create" className="btn btn-primary">
-                        <i className="bi bi-send me-1" />
-                        Send SMS
-                    </Link>
-                ) : undefined}
+                actions={
+                    canSend ? (
+                        <Link
+                            href="/portal/sms-messages/create"
+                            className="btn btn-primary"
+                        >
+                            <i className="bi bi-send me-1" />
+                            Send SMS
+                        </Link>
+                    ) : undefined
+                }
             />
             <DataTable
                 columns={[
@@ -51,7 +56,10 @@ export default function Page({ messages }: Props) {
                         key: 'body',
                         label: 'Message',
                         render: (row) => (
-                            <span className="text-muted small text-truncate d-inline-block" style={{ maxWidth: 280 }}>
+                            <span
+                                className="small text-truncate d-inline-block text-muted"
+                                style={{ maxWidth: 280 }}
+                            >
                                 {row.body}
                             </span>
                         ),
@@ -60,7 +68,9 @@ export default function Page({ messages }: Props) {
                         key: 'status',
                         label: 'Status',
                         render: (row) => (
-                            <span className={`badge ${row.status === 'sent' ? 'bg-success-subtle text-success' : 'bg-danger-subtle text-danger'}`}>
+                            <span
+                                className={`badge ${row.status === 'sent' ? 'bg-success-subtle text-success' : 'bg-danger-subtle text-danger'}`}
+                            >
                                 {row.status}
                             </span>
                         ),

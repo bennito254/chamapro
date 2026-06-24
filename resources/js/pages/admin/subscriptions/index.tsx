@@ -1,8 +1,8 @@
-import { Form, Head, Link, router } from '@inertiajs/react';
+import { Head, router } from '@inertiajs/react';
 import AdminRowActions from '@/components/admin/AdminRowActions';
 import DataTable from '@/components/shared/DataTable';
 import PageHeader from '@/components/shared/PageHeader';
-import { formatCurrency, formatDate, titleCase } from '@/lib/format';
+import { formatDate, titleCase } from '@/lib/format';
 import { edit, index } from '@/routes/admin/subscriptions';
 import type { Paginated } from '@/types/pagination';
 
@@ -53,10 +53,12 @@ export default function Page({ subscriptions, filters, statusOptions }: Props) {
                 description="Billing status across all groups with owner contact details."
             />
 
-            <div className="card border-0 shadow-sm mb-4">
+            <div className="card mb-4 border-0 shadow-sm">
                 <div className="card-body py-3">
-                    <div className="d-flex flex-wrap align-items-center gap-2">
-                        <span className="text-muted small me-1">Filter by status:</span>
+                    <div className="d-flex align-items-center flex-wrap gap-2">
+                        <span className="small me-1 text-muted">
+                            Filter by status:
+                        </span>
                         {statusOptions.map((option) => (
                             <button
                                 key={option.value}
@@ -97,7 +99,9 @@ export default function Page({ subscriptions, filters, statusOptions }: Props) {
                         key: 'status',
                         label: 'Status',
                         render: (row) => (
-                            <span className="badge bg-secondary">{titleCase(row.status)}</span>
+                            <span className="badge bg-secondary">
+                                {titleCase(row.status)}
+                            </span>
                         ),
                     },
                     {
@@ -113,7 +117,9 @@ export default function Page({ subscriptions, filters, statusOptions }: Props) {
                     {
                         key: 'actions',
                         label: '',
-                        render: (row) => <AdminRowActions editHref={edit.url(row)} />,
+                        render: (row) => (
+                            <AdminRowActions editHref={edit.url(row)} />
+                        ),
                     },
                 ]}
                 data={subscriptions}

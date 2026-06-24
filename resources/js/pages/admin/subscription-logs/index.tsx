@@ -65,7 +65,7 @@ export default function Page({ groups, filters }: Props) {
                 description="Subscription history and M-Pesa payment activity for every group."
             />
 
-            <div className="card border-0 shadow-sm mb-4">
+            <div className="card mb-4 border-0 shadow-sm">
                 <div className="card-body">
                     <Form method="get" action={index.url()}>
                         <div className="row g-2 align-items-end">
@@ -83,7 +83,10 @@ export default function Page({ groups, filters }: Props) {
                                 />
                             </div>
                             <div className="col-md-auto">
-                                <button type="submit" className="btn btn-primary">
+                                <button
+                                    type="submit"
+                                    className="btn btn-primary"
+                                >
                                     Search
                                 </button>
                             </div>
@@ -96,21 +99,34 @@ export default function Page({ groups, filters }: Props) {
                 {groups.data.map((group) => (
                     <div key={group.sqid} className="card border-0 shadow-sm">
                         <div className="card-header bg-white">
-                            <div className="d-flex flex-wrap justify-content-between align-items-start gap-2">
+                            <div className="d-flex justify-content-between align-items-start flex-wrap gap-2">
                                 <div>
-                                    <h5 className="mb-1 fw-semibold">{group.name}</h5>
-                                    <p className="text-muted small mb-0">
-                                        Owner: {group.owner.name ?? '—'} · {contactLabel(group.owner)}
+                                    <h5 className="fw-semibold mb-1">
+                                        {group.name}
+                                    </h5>
+                                    <p className="small mb-0 text-muted">
+                                        Owner: {group.owner.name ?? '—'} ·{' '}
+                                        {contactLabel(group.owner)}
                                     </p>
                                 </div>
                                 <div className="text-end">
-                                    <span className={`badge cp-badge-status cp-badge-status--${group.status} me-2`}>
+                                    <span
+                                        className={`badge cp-badge-status cp-badge-status--${group.status} me-2`}
+                                    >
                                         {titleCase(group.status)}
                                     </span>
                                     {group.active_subscription && (
                                         <span className="badge bg-info-subtle text-info">
-                                            {group.active_subscription.plan} · {titleCase(group.active_subscription.status)} · ends{' '}
-                                            {formatDate(group.active_subscription.end_date)}
+                                            {group.active_subscription.plan} ·{' '}
+                                            {titleCase(
+                                                group.active_subscription
+                                                    .status,
+                                            )}{' '}
+                                            · ends{' '}
+                                            {formatDate(
+                                                group.active_subscription
+                                                    .end_date,
+                                            )}
                                         </span>
                                     )}
                                 </div>
@@ -120,7 +136,8 @@ export default function Page({ groups, filters }: Props) {
                             <div className="row g-4">
                                 <div className="col-lg-6">
                                     <h6 className="fw-semibold mb-3">
-                                        Subscription history ({group.subscriptions_count})
+                                        Subscription history (
+                                        {group.subscriptions_count})
                                     </h6>
                                     <DataTable
                                         searchable={false}
@@ -130,17 +147,20 @@ export default function Page({ groups, filters }: Props) {
                                             {
                                                 key: 'status',
                                                 label: 'Status',
-                                                render: (row) => titleCase(row.status),
+                                                render: (row) =>
+                                                    titleCase(row.status),
                                             },
                                             {
                                                 key: 'start_date',
                                                 label: 'Start',
-                                                render: (row) => formatDate(row.start_date),
+                                                render: (row) =>
+                                                    formatDate(row.start_date),
                                             },
                                             {
                                                 key: 'end_date',
                                                 label: 'End',
-                                                render: (row) => formatDate(row.end_date),
+                                                render: (row) =>
+                                                    formatDate(row.end_date),
                                             },
                                         ]}
                                     />
@@ -157,18 +177,25 @@ export default function Page({ groups, filters }: Props) {
                                             {
                                                 key: 'amount',
                                                 label: 'Amount',
-                                                render: (row) => formatCurrency(row.amount),
+                                                render: (row) =>
+                                                    formatCurrency(row.amount),
                                             },
-                                            { key: 'phone_number', label: 'Phone' },
+                                            {
+                                                key: 'phone_number',
+                                                label: 'Phone',
+                                            },
                                             {
                                                 key: 'status',
                                                 label: 'Status',
-                                                render: (row) => titleCase(row.status),
+                                                render: (row) =>
+                                                    titleCase(row.status),
                                             },
                                             {
                                                 key: 'mpesa_receipt_number',
                                                 label: 'Receipt',
-                                                render: (row) => row.mpesa_receipt_number ?? '—',
+                                                render: (row) =>
+                                                    row.mpesa_receipt_number ??
+                                                    '—',
                                             },
                                         ]}
                                     />
@@ -181,7 +208,9 @@ export default function Page({ groups, filters }: Props) {
 
             {groups.data.length === 0 && (
                 <div className="card border-0 shadow-sm">
-                    <div className="card-body text-center text-muted py-5">No groups match your search.</div>
+                    <div className="card-body py-5 text-center text-muted">
+                        No groups match your search.
+                    </div>
                 </div>
             )}
         </>

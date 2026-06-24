@@ -5,8 +5,8 @@ import FormField from '@/components/shared/FormField';
 import PageHeader from '@/components/shared/PageHeader';
 import QuickLinks from '@/components/shared/QuickLinks';
 import StatCard from '@/components/shared/StatCard';
-import { adminQuickLinks } from '@/lib/navigation';
 import { formatDateTime } from '@/lib/format';
+import { adminQuickLinks } from '@/lib/navigation';
 import { update as updateMpesaSettings } from '@/routes/admin/mpesa-settings';
 import type { Group } from '@/types/models';
 
@@ -40,7 +40,11 @@ type Props = {
     mpesaSettings: MpesaSettings;
 };
 
-export default function AdminDashboard({ stats, recentGroups, mpesaSettings }: Props) {
+export default function AdminDashboard({
+    stats,
+    recentGroups,
+    mpesaSettings,
+}: Props) {
     const today = formatDateTime(new Date());
 
     return (
@@ -50,10 +54,19 @@ export default function AdminDashboard({ stats, recentGroups, mpesaSettings }: P
 
             <div className="row g-3 mb-4">
                 <div className="col-sm-6 col-xl-3">
-                    <StatCard title="Total Groups" value={stats.groups_total} icon="buildings" />
+                    <StatCard
+                        title="Total Groups"
+                        value={stats.groups_total}
+                        icon="buildings"
+                    />
                 </div>
                 <div className="col-sm-6 col-xl-3">
-                    <StatCard title="Active Groups" value={stats.groups_active} icon="check-circle-fill" color="success" />
+                    <StatCard
+                        title="Active Groups"
+                        value={stats.groups_active}
+                        icon="check-circle-fill"
+                        color="success"
+                    />
                 </div>
                 <div className="col-sm-6 col-xl-3">
                     <StatCard
@@ -81,15 +94,21 @@ export default function AdminDashboard({ stats, recentGroups, mpesaSettings }: P
 
             <div className="row g-4 mb-4">
                 <div className="col-lg-4">
-                    <div className="card cp-panel border-0 h-100">
-                        <div className="card-header bg-transparent border-0 pt-4 px-4">
-                            <h6 className="fw-semibold mb-0">Subscription Mix</h6>
+                    <div className="card cp-panel h-100 border-0">
+                        <div className="card-header border-0 bg-transparent px-4 pt-4">
+                            <h6 className="fw-semibold mb-0">
+                                Subscription Mix
+                            </h6>
                         </div>
                         <div className="card-body">
                             <Chart
                                 type="donut"
                                 height={280}
-                                series={[stats.subscriptions_active, stats.subscriptions_trial, stats.subscriptions_expired]}
+                                series={[
+                                    stats.subscriptions_active,
+                                    stats.subscriptions_trial,
+                                    stats.subscriptions_expired,
+                                ]}
                                 options={{
                                     labels: ['Active', 'Trial', 'Expired'],
                                     colors: ['#059669', '#f59e0b', '#ef4444'],
@@ -101,10 +120,12 @@ export default function AdminDashboard({ stats, recentGroups, mpesaSettings }: P
                     </div>
                 </div>
                 <div className="col-lg-8">
-                    <div className="card cp-panel border-0 h-100">
-                        <div className="card-header bg-transparent border-0 pt-4 px-4 d-flex justify-content-between align-items-center">
+                    <div className="card cp-panel h-100 border-0">
+                        <div className="card-header d-flex justify-content-between align-items-center border-0 bg-transparent px-4 pt-4">
                             <h6 className="fw-semibold mb-0">Recent Groups</h6>
-                            <span className="badge bg-primary-subtle text-primary">{stats.groups_suspended} suspended</span>
+                            <span className="badge bg-primary-subtle text-primary">
+                                {stats.groups_suspended} suspended
+                            </span>
                         </div>
                         <div className="card-body pt-0">
                             <DataTable
@@ -116,7 +137,9 @@ export default function AdminDashboard({ stats, recentGroups, mpesaSettings }: P
                                         key: 'status',
                                         label: 'Status',
                                         render: (r) => (
-                                            <span className={`badge cp-badge-status cp-badge-status--${r.status}`}>
+                                            <span
+                                                className={`badge cp-badge-status cp-badge-status--${r.status}`}
+                                            >
                                                 {r.status}
                                             </span>
                                         ),
@@ -130,26 +153,39 @@ export default function AdminDashboard({ stats, recentGroups, mpesaSettings }: P
             </div>
 
             <div className="card border-0 shadow-sm">
-                <div className="card-header bg-white d-flex justify-content-between align-items-center">
+                <div className="card-header d-flex justify-content-between align-items-center bg-white">
                     <div>
-                        <h5 className="mb-1 fw-semibold">M-Pesa Express (Subscription Billing)</h5>
-                        <p className="text-muted small mb-0">
-                            Platform Daraja credentials for subscription checkout. Group-level M-Pesa settings remain separate.
+                        <h5 className="fw-semibold mb-1">
+                            M-Pesa Express (Subscription Billing)
+                        </h5>
+                        <p className="small mb-0 text-muted">
+                            Platform Daraja credentials for subscription
+                            checkout. Group-level M-Pesa settings remain
+                            separate.
                         </p>
                     </div>
-                    <span className={`badge ${mpesaSettings.stub_mode ? 'bg-warning-subtle text-warning' : 'bg-success-subtle text-success'}`}>
-                        {mpesaSettings.stub_mode ? 'Stub / sandbox' : 'Live configured'}
+                    <span
+                        className={`badge ${mpesaSettings.stub_mode ? 'bg-warning-subtle text-warning' : 'bg-success-subtle text-success'}`}
+                    >
+                        {mpesaSettings.stub_mode
+                            ? 'Stub / sandbox'
+                            : 'Live configured'}
                     </span>
                 </div>
                 <div className="card-body">
-                    <Form {...updateMpesaSettings.form()} options={{ preserveScroll: true }}>
+                    <Form
+                        {...updateMpesaSettings.form()}
+                        options={{ preserveScroll: true }}
+                    >
                         {({ errors, processing }) => (
                             <div className="row g-3">
                                 <div className="col-md-6">
                                     <FormField
                                         label="Consumer key"
                                         name="mpesa_consumer_key"
-                                        defaultValue={mpesaSettings.mpesa_consumer_key}
+                                        defaultValue={
+                                            mpesaSettings.mpesa_consumer_key
+                                        }
                                         error={errors.mpesa_consumer_key}
                                     />
                                 </div>
@@ -158,7 +194,9 @@ export default function AdminDashboard({ stats, recentGroups, mpesaSettings }: P
                                         label="Consumer secret"
                                         name="mpesa_consumer_secret"
                                         type="password"
-                                        defaultValue={mpesaSettings.mpesa_consumer_secret}
+                                        defaultValue={
+                                            mpesaSettings.mpesa_consumer_secret
+                                        }
                                         error={errors.mpesa_consumer_secret}
                                     />
                                 </div>
@@ -166,7 +204,9 @@ export default function AdminDashboard({ stats, recentGroups, mpesaSettings }: P
                                     <FormField
                                         label="Shortcode"
                                         name="mpesa_shortcode"
-                                        defaultValue={mpesaSettings.mpesa_shortcode}
+                                        defaultValue={
+                                            mpesaSettings.mpesa_shortcode
+                                        }
                                         error={errors.mpesa_shortcode}
                                     />
                                 </div>
@@ -175,7 +215,9 @@ export default function AdminDashboard({ stats, recentGroups, mpesaSettings }: P
                                         label="Passkey"
                                         name="mpesa_passkey"
                                         type="password"
-                                        defaultValue={mpesaSettings.mpesa_passkey}
+                                        defaultValue={
+                                            mpesaSettings.mpesa_passkey
+                                        }
                                         error={errors.mpesa_passkey}
                                     />
                                 </div>
@@ -184,10 +226,18 @@ export default function AdminDashboard({ stats, recentGroups, mpesaSettings }: P
                                         label="Environment"
                                         name="mpesa_environment"
                                         options={[
-                                            { value: 'sandbox', label: 'Sandbox' },
-                                            { value: 'production', label: 'Production' },
+                                            {
+                                                value: 'sandbox',
+                                                label: 'Sandbox',
+                                            },
+                                            {
+                                                value: 'production',
+                                                label: 'Production',
+                                            },
                                         ]}
-                                        defaultValue={mpesaSettings.mpesa_environment}
+                                        defaultValue={
+                                            mpesaSettings.mpesa_environment
+                                        }
                                         error={errors.mpesa_environment}
                                     />
                                 </div>
@@ -195,7 +245,9 @@ export default function AdminDashboard({ stats, recentGroups, mpesaSettings }: P
                                     <FormField
                                         label="Callback URL"
                                         name="mpesa_callback_url"
-                                        defaultValue={mpesaSettings.mpesa_callback_url}
+                                        defaultValue={
+                                            mpesaSettings.mpesa_callback_url
+                                        }
                                         placeholder="https://your-domain.com/api/mpesa/callback"
                                         error={errors.mpesa_callback_url}
                                     />
@@ -213,15 +265,25 @@ export default function AdminDashboard({ stats, recentGroups, mpesaSettings }: P
                                             name="mpesa_stk_enabled"
                                             id="mpesa_stk_enabled"
                                             value="1"
-                                            defaultChecked={mpesaSettings.mpesa_stk_enabled}
+                                            defaultChecked={
+                                                mpesaSettings.mpesa_stk_enabled
+                                            }
                                         />
-                                        <label className="form-check-label" htmlFor="mpesa_stk_enabled">
-                                            Enable M-Pesa Express checkout for subscription renewals
+                                        <label
+                                            className="form-check-label"
+                                            htmlFor="mpesa_stk_enabled"
+                                        >
+                                            Enable M-Pesa Express checkout for
+                                            subscription renewals
                                         </label>
                                     </div>
                                 </div>
                                 <div className="col-12">
-                                    <button type="submit" className="btn btn-primary" disabled={processing}>
+                                    <button
+                                        type="submit"
+                                        className="btn btn-primary"
+                                        disabled={processing}
+                                    >
                                         Save M-Pesa settings
                                     </button>
                                 </div>

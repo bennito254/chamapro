@@ -21,7 +21,14 @@ export default function ExportButtons({
                 <a
                     href={csvHref ?? '#'}
                     className="btn btn-outline-secondary"
-                    onClick={onExportCsv ? (e) => { e.preventDefault(); onExportCsv(); } : undefined}
+                    onClick={
+                        onExportCsv
+                            ? (e) => {
+                                  e.preventDefault();
+                                  onExportCsv();
+                              }
+                            : undefined
+                    }
                 >
                     <i className="bi bi-filetype-csv me-1" />
                     CSV
@@ -31,7 +38,14 @@ export default function ExportButtons({
                 <a
                     href={excelHref ?? '#'}
                     className="btn btn-outline-secondary"
-                    onClick={onExportExcel ? (e) => { e.preventDefault(); onExportExcel(); } : undefined}
+                    onClick={
+                        onExportExcel
+                            ? (e) => {
+                                  e.preventDefault();
+                                  onExportExcel();
+                              }
+                            : undefined
+                    }
                 >
                     <i className="bi bi-file-earmark-excel me-1" />
                     Excel
@@ -41,7 +55,14 @@ export default function ExportButtons({
                 <a
                     href={pdfHref ?? '#'}
                     className="btn btn-outline-secondary"
-                    onClick={onExportPdf ? (e) => { e.preventDefault(); onExportPdf(); } : undefined}
+                    onClick={
+                        onExportPdf
+                            ? (e) => {
+                                  e.preventDefault();
+                                  onExportPdf();
+                              }
+                            : undefined
+                    }
                 >
                     <i className="bi bi-file-earmark-pdf me-1" />
                     PDF

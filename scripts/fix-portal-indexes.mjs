@@ -15,6 +15,7 @@ function idx(title, prop, type, cols, createHref, viewBase) {
     const viewCol = viewBase
         ? `,\n                    { key: 'actions', label: '', render: (row) => <Link href={\`${viewBase}/\${row.id}\`} className="btn btn-sm btn-outline-primary">View</Link> }`
         : '';
+
     return `import { Head, Link } from '@inertiajs/react';
 import DataTable from '@/components/shared/DataTable';
 import PageHeader from '@/components/shared/PageHeader';

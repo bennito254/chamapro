@@ -12,7 +12,11 @@ export default function Page() {
                 title="Admin sign in"
                 description="Super-admin access to manage groups, subscriptions, and platform settings."
             >
-                <Form action={adminLogin.url()} method="post" resetOnSuccess={['password']}>
+                <Form
+                    action={adminLogin.url()}
+                    method="post"
+                    resetOnSuccess={['password']}
+                >
                     {({ errors, processing }) => (
                         <>
                             <AuthFormField
@@ -45,14 +49,17 @@ export default function Page() {
                                     name="remember"
                                     id="remember"
                                 />
-                                <label className="form-check-label" htmlFor="remember">
+                                <label
+                                    className="form-check-label"
+                                    htmlFor="remember"
+                                >
                                     Remember me
                                 </label>
                             </div>
 
                             <button
                                 type="submit"
-                                className="btn btn-primary w-100 cp-auth-submit"
+                                className="btn btn-primary cp-auth-submit w-100"
                                 disabled={processing}
                             >
                                 {processing ? (

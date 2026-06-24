@@ -42,14 +42,18 @@ export default function DataTable<T extends Record<string, unknown>>({
         if (typeof rowKey === 'function') {
             return rowKey(row);
         }
+
         const value = row[rowKey];
-        return typeof value === 'string' || typeof value === 'number' ? value : index;
+
+        return typeof value === 'string' || typeof value === 'number'
+            ? value
+            : index;
     };
 
     return (
         <div className="card border-0 shadow-sm">
             {searchable && (
-                <div className="card-header bg-white border-bottom py-3">
+                <div className="card-header border-bottom bg-white py-3">
                     <div className="input-group" style={{ maxWidth: 320 }}>
                         <span className="input-group-text bg-white">
                             <i className="bi bi-search" />
@@ -60,9 +64,16 @@ export default function DataTable<T extends Record<string, unknown>>({
                             placeholder={searchPlaceholder}
                             onChange={(e) => {
                                 const term = e.target.value.toLowerCase();
-                                const table = e.currentTarget.closest('.card')?.querySelector('tbody');
+                                const table = e.currentTarget
+                                    .closest('.card')
+                                    ?.querySelector('tbody');
                                 table?.querySelectorAll('tr').forEach((tr) => {
-                                    tr.classList.toggle('d-none', !tr.textContent?.toLowerCase().includes(term));
+                                    tr.classList.toggle(
+                                        'd-none',
+                                        !tr.textContent
+                                            ?.toLowerCase()
+                                            .includes(term),
+                                    );
                                 });
                             }}
                         />
@@ -70,7 +81,7 @@ export default function DataTable<T extends Record<string, unknown>>({
                 </div>
             )}
             <div className="table-responsive">
-                <table className="table table-hover align-middle mb-0">
+                <table className="table-hover mb-0 table align-middle">
                     <thead className="table-light">
                         <tr>
                             {columns.map((col) => (
@@ -83,7 +94,10 @@ export default function DataTable<T extends Record<string, unknown>>({
                     <tbody>
                         {rows.length === 0 ? (
                             <tr>
-                                <td colSpan={columns.length} className="text-center text-muted py-5">
+                                <td
+                                    colSpan={columns.length}
+                                    className="py-5 text-center text-muted"
+                                >
                                     {emptyMessage}
                                 </td>
                             </tr>
@@ -91,7 +105,10 @@ export default function DataTable<T extends Record<string, unknown>>({
                             rows.map((row, index) => (
                                 <tr key={resolveKey(row, index)}>
                                     {columns.map((col) => (
-                                        <td key={col.key} className={col.className}>
+                                        <td
+                                            key={col.key}
+                                            className={col.className}
+                                        >
                                             {col.render
                                                 ? col.render(row)
                                                 : String(row[col.key] ?? '—')}
@@ -103,11 +120,14 @@ export default function DataTable<T extends Record<string, unknown>>({
                     </tbody>
                 </table>
             </div>
-            {footer && <div className="card-footer bg-light border-top">{footer}</div>}
+            {footer && (
+                <div className="card-footer bg-light border-top">{footer}</div>
+            )}
             {pagination && pagination.last_page > 1 && (
-                <div className="card-footer bg-white d-flex justify-content-between align-items-center">
+                <div className="card-footer d-flex justify-content-between align-items-center bg-white">
                     <small className="text-muted">
-                        Showing {pagination.from ?? 0}–{pagination.to ?? 0} of {pagination.total}
+                        Showing {pagination.from ?? 0}–{pagination.to ?? 0} of{' '}
+                        {pagination.total}
                     </small>
                     <nav>
                         <ul className="pagination pagination-sm mb-0">
@@ -120,12 +140,16 @@ export default function DataTable<T extends Record<string, unknown>>({
                                         <Link
                                             href={link.url}
                                             className="page-link"
-                                            dangerouslySetInnerHTML={{ __html: link.label }}
+                                            dangerouslySetInnerHTML={{
+                                                __html: link.label,
+                                            }}
                                         />
                                     ) : (
                                         <span
                                             className="page-link"
-                                            dangerouslySetInnerHTML={{ __html: link.label }}
+                                            dangerouslySetInnerHTML={{
+                                                __html: link.label,
+                                            }}
                                         />
                                     )}
                                 </li>

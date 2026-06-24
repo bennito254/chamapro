@@ -4,8 +4,8 @@ import DataTable from '@/components/shared/DataTable';
 import PageHeader from '@/components/shared/PageHeader';
 import { formatCurrency, titleCase } from '@/lib/format';
 import { create, destroy, edit, index } from '@/routes/admin/plans';
-import type { Paginated } from '@/types/pagination';
 import type { SubscriptionPlan } from '@/types/models';
+import type { Paginated } from '@/types/pagination';
 
 type PlanRow = SubscriptionPlan & { subscriptions_count?: number };
 
@@ -31,21 +31,33 @@ export default function Page({ plans }: Props) {
                     {
                         key: 'amount',
                         label: 'Amount',
-                        render: (row) => formatCurrency(Number(row.amount ?? 0)),
+                        render: (row) =>
+                            formatCurrency(Number(row.amount ?? 0)),
                         className: 'text-end',
                     },
                     {
                         key: 'billing_cycle',
                         label: 'Billing',
-                        render: (row) => titleCase(String(row.billing_cycle ?? '')),
+                        render: (row) =>
+                            titleCase(String(row.billing_cycle ?? '')),
                     },
-                    { key: 'max_members', label: 'Max members', className: 'text-end' },
-                    { key: 'max_users', label: 'Max users', className: 'text-end' },
+                    {
+                        key: 'max_members',
+                        label: 'Max members',
+                        className: 'text-end',
+                    },
+                    {
+                        key: 'max_users',
+                        label: 'Max users',
+                        className: 'text-end',
+                    },
                     {
                         key: 'status',
                         label: 'Status',
                         render: (row) => (
-                            <span className={`badge ${row.status === 'active' ? 'bg-success' : 'bg-secondary'}`}>
+                            <span
+                                className={`badge ${row.status === 'active' ? 'bg-success' : 'bg-secondary'}`}
+                            >
                                 {titleCase(String(row.status ?? ''))}
                             </span>
                         ),
@@ -71,7 +83,10 @@ export default function Page({ plans }: Props) {
                 emptyMessage="No subscription plans yet."
             />
             <div className="mt-3">
-                <Link href={index()} className="text-muted small text-decoration-none">
+                <Link
+                    href={index()}
+                    className="small text-decoration-none text-muted"
+                >
                     Refresh list
                 </Link>
             </div>

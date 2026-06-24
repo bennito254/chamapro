@@ -1,5 +1,5 @@
-import { useEffect } from 'react';
 import { usePage } from '@inertiajs/react';
+import { useEffect } from 'react';
 import { toastError, toastSuccess } from '@/lib/toast';
 
 type Flash = {
@@ -14,6 +14,7 @@ export function useFlashToasts(): void {
         if (flash?.success) {
             toastSuccess(flash.success);
         }
+
         if (flash?.error) {
             toastError(flash.error);
         }

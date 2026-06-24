@@ -1,8 +1,8 @@
 import { Head, Link } from '@inertiajs/react';
 import DataTable from '@/components/shared/DataTable';
 import PageHeader from '@/components/shared/PageHeader';
-import type { Paginated } from '@/types/pagination';
 import type { ContributionChannel } from '@/types/models';
+import type { Paginated } from '@/types/pagination';
 
 type Props = { channels: Paginated<ContributionChannel> };
 
@@ -13,7 +13,10 @@ export default function Page({ channels }: Props) {
             <PageHeader
                 title="Payment Channels"
                 actions={
-                    <Link href="/portal/contribution-channels/create" className="btn btn-primary">
+                    <Link
+                        href="/portal/contribution-channels/create"
+                        className="btn btn-primary"
+                    >
                         <i className="bi bi-plus-lg me-1" />
                         Add
                     </Link>

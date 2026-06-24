@@ -33,7 +33,12 @@ type Props = {
     };
 };
 
-export default function Page({ payments, filters, statusOptions, stats }: Props) {
+export default function Page({
+    payments,
+    filters,
+    statusOptions,
+    stats,
+}: Props) {
     const applyStatus = (status: string) => {
         router.get(
             index.url({ query: status === 'all' ? {} : { status } }),
@@ -52,23 +57,44 @@ export default function Page({ payments, filters, statusOptions, stats }: Props)
 
             <div className="row g-3 mb-4">
                 <div className="col-sm-6 col-xl-3">
-                    <StatCard title="Total" value={stats.total} icon="list-ul" />
+                    <StatCard
+                        title="Total"
+                        value={stats.total}
+                        icon="list-ul"
+                    />
                 </div>
                 <div className="col-sm-6 col-xl-3">
-                    <StatCard title="Completed" value={stats.completed} icon="check-circle" color="success" />
+                    <StatCard
+                        title="Completed"
+                        value={stats.completed}
+                        icon="check-circle"
+                        color="success"
+                    />
                 </div>
                 <div className="col-sm-6 col-xl-3">
-                    <StatCard title="Pending" value={stats.pending} icon="hourglass-split" color="warning" />
+                    <StatCard
+                        title="Pending"
+                        value={stats.pending}
+                        icon="hourglass-split"
+                        color="warning"
+                    />
                 </div>
                 <div className="col-sm-6 col-xl-3">
-                    <StatCard title="Failed" value={stats.failed} icon="x-circle" color="danger" />
+                    <StatCard
+                        title="Failed"
+                        value={stats.failed}
+                        icon="x-circle"
+                        color="danger"
+                    />
                 </div>
             </div>
 
-            <div className="card border-0 shadow-sm mb-4">
+            <div className="card mb-4 border-0 shadow-sm">
                 <div className="card-body py-3">
-                    <div className="d-flex flex-wrap align-items-center gap-2">
-                        <span className="text-muted small me-1">Filter by status:</span>
+                    <div className="d-flex align-items-center flex-wrap gap-2">
+                        <span className="small me-1 text-muted">
+                            Filter by status:
+                        </span>
                         {statusOptions.map((option) => (
                             <button
                                 key={option.value}
@@ -109,7 +135,9 @@ export default function Page({ payments, filters, statusOptions, stats }: Props)
                                 key: 'status',
                                 label: 'Status',
                                 render: (row) => (
-                                    <span className={`badge cp-badge-status cp-badge-status--${row.status}`}>
+                                    <span
+                                        className={`badge cp-badge-status cp-badge-status--${row.status}`}
+                                    >
                                         {titleCase(row.status)}
                                     </span>
                                 ),
@@ -117,12 +145,16 @@ export default function Page({ payments, filters, statusOptions, stats }: Props)
                             {
                                 key: 'mpesa_receipt_number',
                                 label: 'Receipt',
-                                render: (row) => row.mpesa_receipt_number ?? '—',
+                                render: (row) =>
+                                    row.mpesa_receipt_number ?? '—',
                             },
                             {
                                 key: 'paid_at',
                                 label: 'Paid',
-                                render: (row) => (row.paid_at ? formatDateTime(row.paid_at) : '—'),
+                                render: (row) =>
+                                    row.paid_at
+                                        ? formatDateTime(row.paid_at)
+                                        : '—',
                             },
                         ]}
                         pagination={payments}

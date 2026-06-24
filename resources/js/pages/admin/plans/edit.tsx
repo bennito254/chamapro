@@ -1,9 +1,9 @@
 import { Form, Head, Link } from '@inertiajs/react';
+import { router } from '@inertiajs/react';
 import FormField from '@/components/shared/FormField';
 import PageHeader from '@/components/shared/PageHeader';
 import { confirmDelete } from '@/lib/alerts';
 import { destroy, index, update } from '@/routes/admin/plans';
-import { router } from '@inertiajs/react';
 import type { SubscriptionPlan } from '@/types/models';
 
 type Props = {
@@ -47,7 +47,11 @@ export default function Page({ plan }: Props) {
                     { label: plan.name },
                 ]}
                 actions={
-                    <button type="button" className="btn btn-outline-danger btn-sm" onClick={handleDelete}>
+                    <button
+                        type="button"
+                        className="btn btn-outline-danger btn-sm"
+                        onClick={handleDelete}
+                    >
                         <i className="bi bi-trash me-1" />
                         Delete
                     </button>
@@ -74,7 +78,9 @@ export default function Page({ plan }: Props) {
                                             name="status"
                                             required
                                             options={statusOptions}
-                                            defaultValue={plan.status ?? 'active'}
+                                            defaultValue={
+                                                plan.status ?? 'active'
+                                            }
                                             error={errors.status}
                                         />
                                     </div>
@@ -84,7 +90,9 @@ export default function Page({ plan }: Props) {
                                             name="billing_cycle"
                                             required
                                             options={billingOptions}
-                                            defaultValue={plan.billing_cycle ?? 'monthly'}
+                                            defaultValue={
+                                                plan.billing_cycle ?? 'monthly'
+                                            }
                                             error={errors.billing_cycle}
                                         />
                                     </div>
@@ -94,7 +102,9 @@ export default function Page({ plan }: Props) {
                                             name="amount"
                                             type="number"
                                             required
-                                            defaultValue={String(plan.amount ?? 0)}
+                                            defaultValue={String(
+                                                plan.amount ?? 0,
+                                            )}
                                             error={errors.amount}
                                         />
                                     </div>
@@ -103,7 +113,9 @@ export default function Page({ plan }: Props) {
                                             label="Discount %"
                                             name="discount_percentage"
                                             type="number"
-                                            defaultValue={String(plan.discount_percentage ?? 0)}
+                                            defaultValue={String(
+                                                plan.discount_percentage ?? 0,
+                                            )}
                                             error={errors.discount_percentage}
                                         />
                                     </div>
@@ -113,7 +125,9 @@ export default function Page({ plan }: Props) {
                                             name="max_members"
                                             type="number"
                                             required
-                                            defaultValue={String(plan.max_members ?? 50)}
+                                            defaultValue={String(
+                                                plan.max_members ?? 50,
+                                            )}
                                             error={errors.max_members}
                                         />
                                     </div>
@@ -123,7 +137,9 @@ export default function Page({ plan }: Props) {
                                             name="max_users"
                                             type="number"
                                             required
-                                            defaultValue={String(plan.max_users ?? 5)}
+                                            defaultValue={String(
+                                                plan.max_users ?? 5,
+                                            )}
                                             error={errors.max_users}
                                         />
                                     </div>
@@ -133,16 +149,27 @@ export default function Page({ plan }: Props) {
                                             name="trial_days"
                                             type="number"
                                             required
-                                            defaultValue={String(plan.trial_days ?? 14)}
+                                            defaultValue={String(
+                                                plan.trial_days ?? 14,
+                                            )}
                                             error={errors.trial_days}
                                         />
                                     </div>
                                 </div>
-                                <div className="d-flex gap-2 mt-4">
-                                    <button type="submit" className="btn btn-primary" disabled={processing}>
-                                        {processing ? 'Saving...' : 'Save changes'}
+                                <div className="d-flex mt-4 gap-2">
+                                    <button
+                                        type="submit"
+                                        className="btn btn-primary"
+                                        disabled={processing}
+                                    >
+                                        {processing
+                                            ? 'Saving...'
+                                            : 'Save changes'}
                                     </button>
-                                    <Link href={index()} className="btn btn-outline-secondary">
+                                    <Link
+                                        href={index()}
+                                        className="btn btn-outline-secondary"
+                                    >
                                         Cancel
                                     </Link>
                                 </div>

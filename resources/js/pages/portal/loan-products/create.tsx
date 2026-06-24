@@ -1,8 +1,8 @@
 import { Form, Head, Link } from '@inertiajs/react';
 import FormField from '@/components/shared/FormField';
+import PageHeader from '@/components/shared/PageHeader';
 import { interestTypeOptions, statusOptions } from '@/lib/form-options';
 import { store } from '@/routes/portal/loan-products';
-import PageHeader from '@/components/shared/PageHeader';
 
 export default function Page() {
     const route = store.form();
@@ -16,8 +16,18 @@ export default function Page() {
                     <Form {...route}>
                         {({ errors, processing }) => (
                             <>
-                                <FormField label="Name" name="name" required error={errors.name} />
-                                <FormField label="Description" name="description" type="textarea" error={errors.description} />
+                                <FormField
+                                    label="Name"
+                                    name="name"
+                                    required
+                                    error={errors.name}
+                                />
+                                <FormField
+                                    label="Description"
+                                    name="description"
+                                    type="textarea"
+                                    error={errors.description}
+                                />
                                 <FormField
                                     label="Max Amount"
                                     name="max_amount"
@@ -73,11 +83,18 @@ export default function Page() {
                                     options={statusOptions}
                                     error={errors.status}
                                 />
-                                <div className="d-flex gap-2 mt-3">
-                                    <button type="submit" className="btn btn-primary" disabled={processing}>
+                                <div className="d-flex mt-3 gap-2">
+                                    <button
+                                        type="submit"
+                                        className="btn btn-primary"
+                                        disabled={processing}
+                                    >
                                         {processing ? 'Saving...' : 'Save'}
                                     </button>
-                                    <Link href="/portal/loan-products" className="btn btn-outline-secondary">
+                                    <Link
+                                        href="/portal/loan-products"
+                                        className="btn btn-outline-secondary"
+                                    >
                                         Cancel
                                     </Link>
                                 </div>

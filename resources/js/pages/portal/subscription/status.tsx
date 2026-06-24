@@ -37,16 +37,23 @@ export default function SubscriptionPaymentStatus({ payment }: Props) {
     return (
         <>
             <Head title="Payment Status" />
-            <PageHeader title="M-Pesa Payment" description={payment.plan?.name} />
+            <PageHeader
+                title="M-Pesa Payment"
+                description={payment.plan?.name}
+            />
 
             <div className="card border-0 shadow-sm">
-                <div className="card-body text-center py-5">
+                <div className="card-body py-5 text-center">
                     {isPending && (
                         <>
-                            <div className="spinner-border text-primary mb-3" role="status" />
+                            <div
+                                className="spinner-border mb-3 text-primary"
+                                role="status"
+                            />
                             <h5 className="fw-semibold">Waiting for payment</h5>
-                            <p className="text-muted mb-0">
-                                Check your phone ({payment.phone_number}) and enter your M-Pesa PIN to complete{' '}
+                            <p className="mb-0 text-muted">
+                                Check your phone ({payment.phone_number}) and
+                                enter your M-Pesa PIN to complete{' '}
                                 {formatCurrency(payment.amount)}.
                             </p>
                         </>
@@ -58,7 +65,7 @@ export default function SubscriptionPaymentStatus({ payment }: Props) {
                                 <i className="bi bi-check-circle-fill" />
                             </div>
                             <h5 className="fw-semibold">Payment successful</h5>
-                            <p className="text-muted mb-0">
+                            <p className="mb-0 text-muted">
                                 Receipt: {payment.mpesa_receipt_number ?? '—'}
                             </p>
                         </>
@@ -70,8 +77,13 @@ export default function SubscriptionPaymentStatus({ payment }: Props) {
                                 <i className="bi bi-x-circle-fill" />
                             </div>
                             <h5 className="fw-semibold">Payment failed</h5>
-                            <p className="text-muted mb-3">The M-Pesa request was not completed.</p>
-                            <Link href={renewPage.url()} className="btn btn-primary">
+                            <p className="mb-3 text-muted">
+                                The M-Pesa request was not completed.
+                            </p>
+                            <Link
+                                href={renewPage.url()}
+                                className="btn btn-primary"
+                            >
                                 Try again
                             </Link>
                         </>

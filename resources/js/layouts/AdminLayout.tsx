@@ -1,7 +1,6 @@
 import { usePage } from '@inertiajs/react';
 import type { ReactNode } from 'react';
 import AppShell from '@/components/shared/AppShell';
-import SubscriptionBanner from '@/components/shared/SubscriptionBanner';
 import { adminNavGroups } from '@/lib/navigation';
 import type { Auth } from '@/types/auth';
 

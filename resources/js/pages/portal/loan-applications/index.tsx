@@ -2,8 +2,8 @@ import { Head, Link } from '@inertiajs/react';
 import DataTable from '@/components/shared/DataTable';
 import PageHeader from '@/components/shared/PageHeader';
 import { formatCurrency, titleCase } from '@/lib/format';
-import type { Paginated } from '@/types/pagination';
 import type { LoanApplication } from '@/types/models';
+import type { Paginated } from '@/types/pagination';
 
 type Props = { applications: Paginated<LoanApplication> };
 
@@ -14,7 +14,10 @@ export default function Page({ applications }: Props) {
             <PageHeader
                 title="Loan Applications"
                 actions={
-                    <Link href="/portal/loan-applications/create" className="btn btn-primary">
+                    <Link
+                        href="/portal/loan-applications/create"
+                        className="btn btn-primary"
+                    >
                         <i className="bi bi-plus-lg me-1" />
                         New application
                     </Link>
@@ -30,7 +33,10 @@ export default function Page({ applications }: Props) {
                     {
                         key: 'product',
                         label: 'Product',
-                        render: (row) => row.loan_product?.name ?? row.loanProduct?.name ?? '—',
+                        render: (row) =>
+                            row.loan_product?.name ??
+                            row.loanProduct?.name ??
+                            '—',
                     },
                     {
                         key: 'requested_amount',

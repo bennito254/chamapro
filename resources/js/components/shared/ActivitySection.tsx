@@ -6,11 +6,13 @@ type Props = {
 
 export default function ActivitySection({ title, count, children }: Props) {
     return (
-        <div className="card border-0 shadow-sm mb-4">
-            <div className="card-header bg-white border-bottom py-3 d-flex align-items-center gap-2">
+        <div className="card mb-4 border-0 shadow-sm">
+            <div className="card-header border-bottom d-flex align-items-center gap-2 bg-white py-3">
                 <h2 className="h6 mb-0">{title}</h2>
                 {count !== undefined && (
-                    <span className="badge bg-light text-dark border">{count}</span>
+                    <span className="badge bg-light text-dark border">
+                        {count}
+                    </span>
                 )}
             </div>
             <div className="card-body p-0">{children}</div>

@@ -1,8 +1,8 @@
 import { Form, Head, Link } from '@inertiajs/react';
 import FormField from '@/components/shared/FormField';
+import PageHeader from '@/components/shared/PageHeader';
 import { statusOptions } from '@/lib/form-options';
 import { store } from '@/routes/portal/bank-accounts';
-import PageHeader from '@/components/shared/PageHeader';
 
 export default function Page() {
     const route = store.form();
@@ -16,10 +16,29 @@ export default function Page() {
                     <Form {...route}>
                         {({ errors, processing }) => (
                             <>
-                                <FormField label="Account Name" name="account_name" required error={errors.account_name} />
-                                <FormField label="Bank" name="bank_name" required error={errors.bank_name} />
-                                <FormField label="Account Number" name="account_number" required error={errors.account_number} />
-                                <FormField label="Branch" name="branch" error={errors.branch} />
+                                <FormField
+                                    label="Account Name"
+                                    name="account_name"
+                                    required
+                                    error={errors.account_name}
+                                />
+                                <FormField
+                                    label="Bank"
+                                    name="bank_name"
+                                    required
+                                    error={errors.bank_name}
+                                />
+                                <FormField
+                                    label="Account Number"
+                                    name="account_number"
+                                    required
+                                    error={errors.account_number}
+                                />
+                                <FormField
+                                    label="Branch"
+                                    name="branch"
+                                    error={errors.branch}
+                                />
                                 <FormField
                                     label="Opening Balance"
                                     name="opening_balance"
@@ -35,11 +54,18 @@ export default function Page() {
                                     options={statusOptions}
                                     error={errors.status}
                                 />
-                                <div className="d-flex gap-2 mt-3">
-                                    <button type="submit" className="btn btn-primary" disabled={processing}>
+                                <div className="d-flex mt-3 gap-2">
+                                    <button
+                                        type="submit"
+                                        className="btn btn-primary"
+                                        disabled={processing}
+                                    >
                                         {processing ? 'Saving...' : 'Save'}
                                     </button>
-                                    <Link href="/portal/bank-accounts" className="btn btn-outline-secondary">
+                                    <Link
+                                        href="/portal/bank-accounts"
+                                        className="btn btn-outline-secondary"
+                                    >
                                         Cancel
                                     </Link>
                                 </div>

@@ -14,7 +14,11 @@ type Note = {
 };
 
 type Props = {
-    ticket: SupportTicket & { notes?: Note[]; group?: { name: string }; user?: { name: string; email: string } };
+    ticket: SupportTicket & {
+        notes?: Note[];
+        group?: { name: string };
+        user?: { name: string; email: string };
+    };
 };
 
 const statusOptions = [
@@ -52,23 +56,38 @@ export default function Page({ ticket }: Props) {
                             { label: 'Group', value: ticket.group?.name },
                             { label: 'Submitted by', value: ticket.user?.name },
                             { label: 'Email', value: ticket.user?.email },
-                            { label: 'Priority', value: ticket.priority, format: 'badge' },
-                            { label: 'Status', value: ticket.status, format: 'badge' },
+                            {
+                                label: 'Priority',
+                                value: ticket.priority,
+                                format: 'badge',
+                            },
+                            {
+                                label: 'Status',
+                                value: ticket.status,
+                                format: 'badge',
+                            },
                             { label: 'Message', value: ticket.message },
-                            { label: 'Created', value: ticket.created_at, format: 'datetime' },
+                            {
+                                label: 'Created',
+                                value: ticket.created_at,
+                                format: 'datetime',
+                            },
                         ]}
                     />
 
                     {ticket.notes && ticket.notes.length > 0 && (
-                        <div className="card border-0 shadow-sm mt-4">
+                        <div className="card mt-4 border-0 shadow-sm">
                             <div className="card-header bg-white">
-                                <h6 className="mb-0 fw-semibold">Notes</h6>
+                                <h6 className="fw-semibold mb-0">Notes</h6>
                             </div>
                             <ul className="list-group list-group-flush">
                                 {ticket.notes.map((note) => (
-                                    <li key={note.id} className="list-group-item">
+                                    <li
+                                        key={note.id}
+                                        className="list-group-item"
+                                    >
                                         <p className="mb-1">{note.body}</p>
-                                        <span className="text-muted small">
+                                        <span className="small text-muted">
                                             {formatDateTime(note.created_at)}
                                             {note.is_internal && ' · Internal'}
                                         </span>
@@ -80,9 +99,9 @@ export default function Page({ ticket }: Props) {
                 </div>
 
                 <div className="col-lg-5">
-                    <div className="card border-0 shadow-sm mb-4">
+                    <div className="card mb-4 border-0 shadow-sm">
                         <div className="card-header bg-white">
-                            <h6 className="mb-0 fw-semibold">Update ticket</h6>
+                            <h6 className="fw-semibold mb-0">Update ticket</h6>
                         </div>
                         <div className="card-body">
                             <Form {...update.form(ticket)}>
@@ -104,8 +123,14 @@ export default function Page({ ticket }: Props) {
                                             defaultValue={ticket.priority}
                                             error={errors.priority}
                                         />
-                                        <button type="submit" className="btn btn-primary" disabled={processing}>
-                                            {processing ? 'Saving...' : 'Update ticket'}
+                                        <button
+                                            type="submit"
+                                            className="btn btn-primary"
+                                            disabled={processing}
+                                        >
+                                            {processing
+                                                ? 'Saving...'
+                                                : 'Update ticket'}
                                         </button>
                                     </>
                                 )}
@@ -115,10 +140,13 @@ export default function Page({ ticket }: Props) {
 
                     <div className="card border-0 shadow-sm">
                         <div className="card-header bg-white">
-                            <h6 className="mb-0 fw-semibold">Add note</h6>
+                            <h6 className="fw-semibold mb-0">Add note</h6>
                         </div>
                         <div className="card-body">
-                            <Form action={`/admin/support-tickets/${ticket.sqid}/notes`} method="post">
+                            <Form
+                                action={`/admin/support-tickets/${ticket.sqid}/notes`}
+                                method="post"
+                            >
                                 {({ errors, processing }) => (
                                     <>
                                         <FormField
@@ -137,11 +165,19 @@ export default function Page({ ticket }: Props) {
                                                 id="is_internal"
                                                 value="1"
                                             />
-                                            <label className="form-check-label" htmlFor="is_internal">
-                                                Internal note (not visible to group)
+                                            <label
+                                                className="form-check-label"
+                                                htmlFor="is_internal"
+                                            >
+                                                Internal note (not visible to
+                                                group)
                                             </label>
                                         </div>
-                                        <button type="submit" className="btn btn-outline-primary" disabled={processing}>
+                                        <button
+                                            type="submit"
+                                            className="btn btn-outline-primary"
+                                            disabled={processing}
+                                        >
                                             Add note
                                         </button>
                                     </>

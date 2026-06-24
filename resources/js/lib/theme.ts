@@ -2,10 +2,14 @@ const THEME_KEY = 'data-bs-theme';
 
 export function getTheme(): 'light' | 'dark' {
     const stored = localStorage.getItem(THEME_KEY);
+
     if (stored === 'dark' || stored === 'light') {
         return stored;
     }
-    return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+
+    return window.matchMedia('(prefers-color-scheme: dark)').matches
+        ? 'dark'
+        : 'light';
 }
 
 export function setTheme(theme: 'light' | 'dark'): void {
@@ -16,6 +20,7 @@ export function setTheme(theme: 'light' | 'dark'): void {
 export function toggleTheme(): 'light' | 'dark' {
     const next = getTheme() === 'dark' ? 'light' : 'dark';
     setTheme(next);
+
     return next;
 }
 

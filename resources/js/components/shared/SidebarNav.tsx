@@ -1,5 +1,5 @@
 import { Link, usePage } from '@inertiajs/react';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import type { NavGroup } from '@/lib/navigation';
 
 type Props = {
@@ -19,26 +19,37 @@ function groupHasActiveItem(url: string, group: NavGroup): boolean {
     return group.items.some((item) => isActive(url, item.href));
 }
 
+function readStoredToggles(storageKey: string): Record<string, boolean> {
+    const stored = localStorage.getItem(storageKey);
+
+    if (!stored) {
+        return {};
+    }
+
+    try {
+        return JSON.parse(stored) as Record<string, boolean>;
+    } catch {
+        return {};
+    }
+}
+
 export default function SidebarNav({ groups, storageKey }: Props) {
     const { url } = usePage();
-    const [openGroups, setOpenGroups] = useState<Record<string, boolean>>({});
+    const [userToggles, setUserToggles] = useState<Record<string, boolean>>(
+        () => readStoredToggles(storageKey),
+    );
 
-    useEffect(() => {
-        const stored = localStorage.getItem(storageKey);
-        const parsed = stored ? (JSON.parse(stored) as Record<string, boolean>) : {};
+    const isGroupOpen = (group: NavGroup): boolean => {
+        if (group.id in userToggles) {
+            return userToggles[group.id];
+        }
 
-        const initial: Record<string, boolean> = {};
-        groups.forEach((group) => {
-            const hasActive = groupHasActiveItem(url, group);
-            initial[group.id] = parsed[group.id] ?? hasActive ?? group.id === 'overview';
-        });
+        return groupHasActiveItem(url, group) || group.id === 'overview';
+    };
 
-        setOpenGroups(initial);
-    }, [groups, storageKey, url]);
-
-    const toggleGroup = (id: string) => {
-        setOpenGroups((prev) => {
-            const next = { ...prev, [id]: !prev[id] };
+    const toggleGroup = (group: NavGroup) => {
+        setUserToggles((prev) => {
+            const next = { ...prev, [group.id]: !isGroupOpen(group) };
             localStorage.setItem(storageKey, JSON.stringify(next));
 
             return next;
@@ -48,9 +59,10 @@ export default function SidebarNav({ groups, storageKey }: Props) {
     return (
         <nav className="cp-sidebar-nav">
             {groups.map((group) => {
-                const isOpen = openGroups[group.id] ?? false;
+                const isOpen = isGroupOpen(group);
                 const hasActive = groupHasActiveItem(url, group);
-                const isSingleItem = group.items.length === 1 && group.id === 'overview';
+                const isSingleItem =
+                    group.items.length === 1 && group.id === 'overview';
 
                 if (isSingleItem) {
                     const item = group.items[0];
@@ -72,7 +84,7 @@ export default function SidebarNav({ groups, storageKey }: Props) {
                         <button
                             type="button"
                             className={`cp-nav-group-toggle ${hasActive ? 'has-active' : ''} ${isOpen ? 'open' : ''}`}
-                            onClick={() => toggleGroup(group.id)}
+                            onClick={() => toggleGroup(group)}
                             aria-expanded={isOpen}
                         >
                             <span className="cp-nav-group-label">
@@ -81,17 +93,19 @@ export default function SidebarNav({ groups, storageKey }: Props) {
                             </span>
                             <i className="bi bi-chevron-down cp-nav-chevron" />
                         </button>
-                        <div className={`cp-nav-submenu ${isOpen ? 'show' : ''}`}>
+                        <div
+                            className={`cp-nav-submenu ${isOpen ? 'show' : ''}`}
+                        >
                             <div className="cp-nav-submenu-inner">
                                 {group.items.map((item) => (
-                                <Link
-                                    key={item.href}
-                                    href={item.href}
-                                    className={`cp-nav-subitem ${isActive(url, item.href) ? 'active' : ''}`}
-                                >
-                                    <i className={`bi bi-${item.icon}`} />
-                                    <span>{item.label}</span>
-                                </Link>
+                                    <Link
+                                        key={item.href}
+                                        href={item.href}
+                                        className={`cp-nav-subitem ${isActive(url, item.href) ? 'active' : ''}`}
+                                    >
+                                        <i className={`bi bi-${item.icon}`} />
+                                        <span>{item.label}</span>
+                                    </Link>
                                 ))}
                             </div>
                         </div>

@@ -1,8 +1,8 @@
 import { Form, Head, Link } from '@inertiajs/react';
 import FormField from '@/components/shared/FormField';
+import PageHeader from '@/components/shared/PageHeader';
 import { statusOptions } from '@/lib/form-options';
 import { update } from '@/routes/portal/contribution-channels';
-import PageHeader from '@/components/shared/PageHeader';
 import type { ContributionChannel } from '@/types/models';
 
 type Props = {
@@ -32,15 +32,24 @@ export default function Page({ channel }: Props) {
                                     label="Status"
                                     name="status"
                                     required
-                                    defaultValue={String(channel.status ?? 'active')}
+                                    defaultValue={String(
+                                        channel.status ?? 'active',
+                                    )}
                                     options={statusOptions}
                                     error={errors.status}
                                 />
-                                <div className="d-flex gap-2 mt-3">
-                                    <button type="submit" className="btn btn-primary" disabled={processing}>
+                                <div className="d-flex mt-3 gap-2">
+                                    <button
+                                        type="submit"
+                                        className="btn btn-primary"
+                                        disabled={processing}
+                                    >
                                         {processing ? 'Saving...' : 'Save'}
                                     </button>
-                                    <Link href="/portal/contribution-channels" className="btn btn-outline-secondary">
+                                    <Link
+                                        href="/portal/contribution-channels"
+                                        className="btn btn-outline-secondary"
+                                    >
                                         Cancel
                                     </Link>
                                 </div>

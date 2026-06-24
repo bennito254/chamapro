@@ -1,7 +1,7 @@
 import { Form, Head, Link } from '@inertiajs/react';
 import FormField from '@/components/shared/FormField';
-import { update } from '@/routes/portal/meetings';
 import PageHeader from '@/components/shared/PageHeader';
+import { update } from '@/routes/portal/meetings';
 import type { Meeting } from '@/types/models';
 
 const meetingStatusOptions = [
@@ -38,7 +38,9 @@ export default function Page({ meeting }: Props) {
                                     name="date"
                                     type="date"
                                     required
-                                    defaultValue={String(meeting.date ?? '').slice(0, 10)}
+                                    defaultValue={String(
+                                        meeting.date ?? '',
+                                    ).slice(0, 10)}
                                     error={errors.date}
                                 />
                                 <FormField
@@ -58,15 +60,24 @@ export default function Page({ meeting }: Props) {
                                     label="Status"
                                     name="status"
                                     required
-                                    defaultValue={String(meeting.status ?? 'scheduled')}
+                                    defaultValue={String(
+                                        meeting.status ?? 'scheduled',
+                                    )}
                                     options={meetingStatusOptions}
                                     error={errors.status}
                                 />
-                                <div className="d-flex gap-2 mt-3">
-                                    <button type="submit" className="btn btn-primary" disabled={processing}>
+                                <div className="d-flex mt-3 gap-2">
+                                    <button
+                                        type="submit"
+                                        className="btn btn-primary"
+                                        disabled={processing}
+                                    >
                                         {processing ? 'Saving...' : 'Save'}
                                     </button>
-                                    <Link href={`/portal/meetings/${meeting.sqid}`} className="btn btn-outline-secondary">
+                                    <Link
+                                        href={`/portal/meetings/${meeting.sqid}`}
+                                        className="btn btn-outline-secondary"
+                                    >
                                         Cancel
                                     </Link>
                                 </div>

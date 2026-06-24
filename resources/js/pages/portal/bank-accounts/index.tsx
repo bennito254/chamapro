@@ -1,8 +1,8 @@
 import { Head, Link } from '@inertiajs/react';
 import DataTable from '@/components/shared/DataTable';
 import PageHeader from '@/components/shared/PageHeader';
-import type { Paginated } from '@/types/pagination';
 import type { BankAccount } from '@/types/models';
+import type { Paginated } from '@/types/pagination';
 
 type Props = { accounts: Paginated<BankAccount> };
 
@@ -13,7 +13,10 @@ export default function Page({ accounts }: Props) {
             <PageHeader
                 title="Bank Accounts"
                 actions={
-                    <Link href="/portal/bank-accounts/create" className="btn btn-primary">
+                    <Link
+                        href="/portal/bank-accounts/create"
+                        className="btn btn-primary"
+                    >
                         <i className="bi bi-plus-lg me-1" />
                         Add
                     </Link>
@@ -27,13 +30,19 @@ export default function Page({ accounts }: Props) {
                     {
                         key: 'current_balance',
                         label: 'Balance',
-                        render: (row) => (row.current_balance != null ? String(row.current_balance) : '0'),
+                        render: (row) =>
+                            row.current_balance != null
+                                ? String(row.current_balance)
+                                : '0',
                     },
                     {
                         key: 'actions',
                         label: '',
                         render: (row) => (
-                            <Link href={`/portal/bank-accounts/${row.sqid}`} className="btn btn-sm btn-outline-primary">
+                            <Link
+                                href={`/portal/bank-accounts/${row.sqid}`}
+                                className="btn btn-sm btn-outline-primary"
+                            >
                                 View
                             </Link>
                         ),

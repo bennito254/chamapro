@@ -1,12 +1,13 @@
 import { Head, Link, router } from '@inertiajs/react';
-import { FormEvent, useState } from 'react';
+import type { FormEvent } from 'react';
+import { useState } from 'react';
 import DataTable from '@/components/shared/DataTable';
 import PageHeader from '@/components/shared/PageHeader';
-import { formatCurrency, formatDate, titleCase } from '@/lib/format';
 import { loanStatusFilterOptions } from '@/lib/form-options';
+import { formatCurrency, formatDate, titleCase } from '@/lib/format';
 import { index as loansIndex } from '@/routes/portal/loans';
-import type { Paginated } from '@/types/pagination';
 import type { Loan } from '@/types/models';
+import type { Paginated } from '@/types/pagination';
 
 type Filters = {
     search: string;
@@ -25,7 +26,11 @@ function statusBadge(status: string) {
         defaulted: 'bg-danger',
     };
 
-    return <span className={`badge ${map[status] ?? 'bg-secondary'}`}>{titleCase(status)}</span>;
+    return (
+        <span className={`badge ${map[status] ?? 'bg-secondary'}`}>
+            {titleCase(status)}
+        </span>
+    );
 }
 
 export default function Page({ loans, filters }: Props) {
@@ -50,7 +55,11 @@ export default function Page({ loans, filters }: Props) {
     const clearFilters = () => {
         setSearch('');
         setStatus('all');
-        router.get(loansIndex.url(), {}, { preserveState: true, replace: true });
+        router.get(
+            loansIndex.url(),
+            {},
+            { preserveState: true, replace: true },
+        );
     };
 
     const hasFilters = filters.search !== '' || filters.status !== 'all';
@@ -63,9 +72,12 @@ export default function Page({ loans, filters }: Props) {
                 description="Search and filter active and closed member loans."
             />
 
-            <div className="card border-0 shadow-sm mb-4">
+            <div className="card mb-4 border-0 shadow-sm">
                 <div className="card-body">
-                    <form onSubmit={applyFilters} className="row g-3 align-items-end">
+                    <form
+                        onSubmit={applyFilters}
+                        className="row g-3 align-items-end"
+                    >
                         <div className="col-md-5">
                             <label htmlFor="loan-search" className="form-label">
                                 Search
@@ -80,7 +92,9 @@ export default function Page({ loans, filters }: Props) {
                                     className="form-control"
                                     placeholder="Member name, membership #, or product..."
                                     value={search}
-                                    onChange={(event) => setSearch(event.target.value)}
+                                    onChange={(event) =>
+                                        setSearch(event.target.value)
+                                    }
                                 />
                             </div>
                         </div>
@@ -92,10 +106,15 @@ export default function Page({ loans, filters }: Props) {
                                 id="loan-status"
                                 className="form-select"
                                 value={status}
-                                onChange={(event) => setStatus(event.target.value)}
+                                onChange={(event) =>
+                                    setStatus(event.target.value)
+                                }
                             >
                                 {loanStatusFilterOptions.map((option) => (
-                                    <option key={option.value} value={option.value}>
+                                    <option
+                                        key={option.value}
+                                        value={option.value}
+                                    >
                                         {option.label}
                                     </option>
                                 ))}
@@ -106,7 +125,11 @@ export default function Page({ loans, filters }: Props) {
                                 Apply filters
                             </button>
                             {hasFilters && (
-                                <button type="button" className="btn btn-outline-secondary" onClick={clearFilters}>
+                                <button
+                                    type="button"
+                                    className="btn btn-outline-secondary"
+                                    onClick={clearFilters}
+                                >
                                     Clear
                                 </button>
                             )}
@@ -122,15 +145,20 @@ export default function Page({ loans, filters }: Props) {
                         label: 'Member',
                         render: (row) => (
                             <div>
-                                <div className="fw-medium">{row.member?.full_name ?? '—'}</div>
-                                <small className="text-muted">{row.member?.membership_number}</small>
+                                <div className="fw-medium">
+                                    {row.member?.full_name ?? '—'}
+                                </div>
+                                <small className="text-muted">
+                                    {row.member?.membership_number}
+                                </small>
                             </div>
                         ),
                     },
                     {
                         key: 'product',
                         label: 'Product',
-                        render: (row) => row.product_name ?? row.loanProduct?.name ?? '—',
+                        render: (row) =>
+                            row.product_name ?? row.loanProduct?.name ?? '—',
                     },
                     {
                         key: 'principal_amount',
@@ -142,7 +170,8 @@ export default function Page({ loans, filters }: Props) {
                         key: 'outstanding_balance',
                         label: 'Outstanding',
                         className: 'text-end',
-                        render: (row) => formatCurrency(row.outstanding_balance),
+                        render: (row) =>
+                            formatCurrency(row.outstanding_balance),
                     },
                     {
                         key: 'disbursement_date',
@@ -158,7 +187,10 @@ export default function Page({ loans, filters }: Props) {
                         key: 'actions',
                         label: '',
                         render: (row) => (
-                            <Link href={`/portal/loans/${row.sqid}`} className="btn btn-sm btn-outline-primary">
+                            <Link
+                                href={`/portal/loans/${row.sqid}`}
+                                className="btn btn-sm btn-outline-primary"
+                            >
                                 View
                             </Link>
                         ),
@@ -166,7 +198,11 @@ export default function Page({ loans, filters }: Props) {
                 ]}
                 data={loans}
                 searchable={false}
-                emptyMessage={hasFilters ? 'No loans match your filters.' : 'No loans recorded yet.'}
+                emptyMessage={
+                    hasFilters
+                        ? 'No loans match your filters.'
+                        : 'No loans recorded yet.'
+                }
             />
         </>
     );

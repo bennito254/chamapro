@@ -27,7 +27,12 @@ export default function Page({ plans }: Props) {
                             <>
                                 <div className="row g-3">
                                     <div className="col-md-6">
-                                        <FormField label="Group name" name="name" required error={errors.name} />
+                                        <FormField
+                                            label="Group name"
+                                            name="name"
+                                            required
+                                            error={errors.name}
+                                        />
                                     </div>
                                     <div className="col-md-6">
                                         <FormField
@@ -37,13 +42,26 @@ export default function Page({ plans }: Props) {
                                         />
                                     </div>
                                     <div className="col-md-4">
-                                        <FormField label="Phone" name="phone" error={errors.phone} />
+                                        <FormField
+                                            label="Phone"
+                                            name="phone"
+                                            error={errors.phone}
+                                        />
                                     </div>
                                     <div className="col-md-4">
-                                        <FormField label="Email" name="email" type="email" error={errors.email} />
+                                        <FormField
+                                            label="Email"
+                                            name="email"
+                                            type="email"
+                                            error={errors.email}
+                                        />
                                     </div>
                                     <div className="col-md-4">
-                                        <FormField label="County" name="county" error={errors.county} />
+                                        <FormField
+                                            label="County"
+                                            name="county"
+                                            error={errors.county}
+                                        />
                                     </div>
                                     <div className="col-md-6">
                                         <FormField
@@ -58,11 +76,20 @@ export default function Page({ plans }: Props) {
                                         />
                                     </div>
                                 </div>
-                                <div className="d-flex gap-2 mt-4">
-                                    <button type="submit" className="btn btn-primary" disabled={processing}>
-                                        {processing ? 'Creating...' : 'Create group'}
+                                <div className="d-flex mt-4 gap-2">
+                                    <button
+                                        type="submit"
+                                        className="btn btn-primary"
+                                        disabled={processing}
+                                    >
+                                        {processing
+                                            ? 'Creating...'
+                                            : 'Create group'}
                                     </button>
-                                    <Link href={index()} className="btn btn-outline-secondary">
+                                    <Link
+                                        href={index()}
+                                        className="btn btn-outline-secondary"
+                                    >
                                         Cancel
                                     </Link>
                                 </div>

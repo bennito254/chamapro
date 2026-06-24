@@ -30,7 +30,13 @@ export default function Page({ template, placeholders }: Props) {
                             <Form {...route}>
                                 {({ errors, processing }) => (
                                     <>
-                                        <FormField label="Name" name="name" required defaultValue={template.name} error={errors.name} />
+                                        <FormField
+                                            label="Name"
+                                            name="name"
+                                            required
+                                            defaultValue={template.name}
+                                            error={errors.name}
+                                        />
                                         <FormField
                                             label="Message body"
                                             name="body"
@@ -49,11 +55,20 @@ export default function Page({ template, placeholders }: Props) {
                                             options={statusOptions}
                                             error={errors.status}
                                         />
-                                        <div className="d-flex gap-2 mt-3">
-                                            <button type="submit" className="btn btn-primary" disabled={processing}>
-                                                {processing ? 'Saving...' : 'Save'}
+                                        <div className="d-flex mt-3 gap-2">
+                                            <button
+                                                type="submit"
+                                                className="btn btn-primary"
+                                                disabled={processing}
+                                            >
+                                                {processing
+                                                    ? 'Saving...'
+                                                    : 'Save'}
                                             </button>
-                                            <Link href="/portal/sms-templates" className="btn btn-outline-secondary">
+                                            <Link
+                                                href="/portal/sms-templates"
+                                                className="btn btn-outline-secondary"
+                                            >
                                                 Cancel
                                             </Link>
                                         </div>
@@ -65,15 +80,17 @@ export default function Page({ template, placeholders }: Props) {
                 </div>
                 <div className="col-lg-4">
                     <div className="card border-0 shadow-sm">
-                        <div className="card-header bg-transparent border-0 pt-3">
+                        <div className="card-header border-0 bg-transparent pt-3">
                             <h6 className="mb-0">Available placeholders</h6>
                         </div>
                         <div className="card-body pt-0">
-                            <ul className="list-unstyled mb-0 small">
+                            <ul className="list-unstyled small mb-0">
                                 {placeholders.map((placeholder) => (
                                     <li key={placeholder.key} className="mb-2">
                                         <code>{`{${placeholder.key}}`}</code>
-                                        <div className="text-muted">{placeholder.description}</div>
+                                        <div className="text-muted">
+                                            {placeholder.description}
+                                        </div>
                                     </li>
                                 ))}
                             </ul>

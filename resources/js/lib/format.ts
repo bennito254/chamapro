@@ -60,9 +60,16 @@ export function formatDate(value: DateInput): string {
     return formatDateTime(value);
 }
 
-export function formatCurrency(amount: number | string, currency = 'KES'): string {
+export function formatCurrency(
+    amount: number | string,
+    currency = 'KES',
+): string {
     const value = typeof amount === 'string' ? parseFloat(amount) : amount;
-    return new Intl.NumberFormat('en-KE', { style: 'currency', currency }).format(value || 0);
+
+    return new Intl.NumberFormat('en-KE', {
+        style: 'currency',
+        currency,
+    }).format(value || 0);
 }
 
 export function titleCase(value: string): string {

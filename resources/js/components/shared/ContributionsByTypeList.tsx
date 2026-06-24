@@ -32,7 +32,9 @@ function contributionColumns(showActions: boolean) {
             key: 'channel',
             label: 'Channel',
             render: (row: Contribution) =>
-                row.contribution_channel?.name ?? row.contributionChannel?.name ?? '—',
+                row.contribution_channel?.name ??
+                row.contributionChannel?.name ??
+                '—',
         },
         {
             key: 'amount',
@@ -46,7 +48,10 @@ function contributionColumns(showActions: boolean) {
                       key: 'actions',
                       label: '',
                       render: (row: Contribution) => (
-                          <Link href={`/portal/contributions/${row.sqid}`} className="btn btn-sm btn-outline-primary">
+                          <Link
+                              href={`/portal/contributions/${row.sqid}`}
+                              className="btn btn-sm btn-outline-primary"
+                          >
                               View
                           </Link>
                       ),
@@ -62,26 +67,35 @@ export default function ContributionsByTypeList({
     showActions = true,
     showSummary = true,
 }: Props) {
-    const [activeTypeId, setActiveTypeId] = useState<number | null>(groups[0]?.type.id ?? null);
+    const [activeTypeId, setActiveTypeId] = useState<number | null>(
+        groups[0]?.type.id ?? null,
+    );
 
     if (groups.length === 0) {
-        return <p className="text-muted mb-0">{emptyMessage}</p>;
+        return <p className="mb-0 text-muted">{emptyMessage}</p>;
     }
 
-    const grandTotal = groups.reduce((sum, group) => sum + group.total_amount, 0);
-    const grandCount = groups.reduce((sum, group) => sum + group.contributions_count, 0);
-    const activeGroup = groups.find((group) => group.type.id === activeTypeId) ?? groups[0];
+    const grandTotal = groups.reduce(
+        (sum, group) => sum + group.total_amount,
+        0,
+    );
+    const grandCount = groups.reduce(
+        (sum, group) => sum + group.contributions_count,
+        0,
+    );
+    const activeGroup =
+        groups.find((group) => group.type.id === activeTypeId) ?? groups[0];
     const columns = contributionColumns(showActions);
 
     return (
         <div className="d-flex flex-column gap-4">
             {showSummary && (
                 <div className="card border-0 shadow-sm">
-                    <div className="card-header bg-white border-bottom py-3">
+                    <div className="card-header border-bottom bg-white py-3">
                         <h3 className="h6 mb-0">Totals by contribution type</h3>
                     </div>
                     <div className="table-responsive">
-                        <table className="table table-sm mb-0 align-middle cp-table">
+                        <table className="table-sm cp-table mb-0 table align-middle">
                             <thead>
                                 <tr>
                                     <th>Contribution type</th>
@@ -91,26 +105,42 @@ export default function ContributionsByTypeList({
                             </thead>
                             <tbody>
                                 {groups.map((group) => {
-                                    const isActive = activeGroup.type.id === group.type.id;
+                                    const isActive =
+                                        activeGroup.type.id === group.type.id;
 
                                     return (
                                         <tr
                                             key={group.type.id}
                                             className={`cp-type-summary-row ${isActive ? 'is-active' : ''}`}
-                                            onClick={() => setActiveTypeId(group.type.id)}
+                                            onClick={() =>
+                                                setActiveTypeId(group.type.id)
+                                            }
                                             onKeyDown={(event) => {
-                                                if (event.key === 'Enter' || event.key === ' ') {
+                                                if (
+                                                    event.key === 'Enter' ||
+                                                    event.key === ' '
+                                                ) {
                                                     event.preventDefault();
-                                                    setActiveTypeId(group.type.id);
+                                                    setActiveTypeId(
+                                                        group.type.id,
+                                                    );
                                                 }
                                             }}
                                             tabIndex={0}
                                             role="button"
                                             aria-pressed={isActive}
                                         >
-                                            <td className="fw-medium">{group.type.name}</td>
-                                            <td className="text-end">{group.contributions_count}</td>
-                                            <td className="text-end">{formatCurrency(group.total_amount)}</td>
+                                            <td className="fw-medium">
+                                                {group.type.name}
+                                            </td>
+                                            <td className="text-end">
+                                                {group.contributions_count}
+                                            </td>
+                                            <td className="text-end">
+                                                {formatCurrency(
+                                                    group.total_amount,
+                                                )}
+                                            </td>
                                         </tr>
                                     );
                                 })}
@@ -119,7 +149,9 @@ export default function ContributionsByTypeList({
                                 <tr className="fw-semibold">
                                     <td>Grand total</td>
                                     <td className="text-end">{grandCount}</td>
-                                    <td className="text-end text-primary">{formatCurrency(grandTotal)}</td>
+                                    <td className="text-end text-primary">
+                                        {formatCurrency(grandTotal)}
+                                    </td>
                                 </tr>
                             </tfoot>
                         </table>
@@ -127,11 +159,16 @@ export default function ContributionsByTypeList({
                 </div>
             )}
 
-            <div className="card border-0 shadow-sm overflow-hidden">
+            <div className="card overflow-hidden border-0 shadow-sm">
                 <div className="cp-type-tabs">
-                    <div className="cp-type-tabs__scroll" role="tablist" aria-label="Contribution types">
+                    <div
+                        className="cp-type-tabs__scroll"
+                        role="tablist"
+                        aria-label="Contribution types"
+                    >
                         {groups.map((group) => {
-                            const isActive = activeGroup.type.id === group.type.id;
+                            const isActive =
+                                activeGroup.type.id === group.type.id;
 
                             return (
                                 <button
@@ -142,11 +179,17 @@ export default function ContributionsByTypeList({
                                     aria-selected={isActive}
                                     aria-controls={`contribution-type-panel-${group.type.id}`}
                                     className={`cp-type-tabs__item ${isActive ? 'is-active' : ''}`}
-                                    onClick={() => setActiveTypeId(group.type.id)}
+                                    onClick={() =>
+                                        setActiveTypeId(group.type.id)
+                                    }
                                 >
-                                    <span className="cp-type-tabs__label">{group.type.name}</span>
+                                    <span className="cp-type-tabs__label">
+                                        {group.type.name}
+                                    </span>
                                     <span className="cp-type-tabs__meta">
-                                        <span className="cp-type-tabs__count">{group.contributions_count}</span>
+                                        <span className="cp-type-tabs__count">
+                                            {group.contributions_count}
+                                        </span>
                                         <span className="cp-type-tabs__amount">
                                             {formatCurrency(group.total_amount)}
                                         </span>
@@ -171,10 +214,15 @@ export default function ContributionsByTypeList({
                         footer={
                             <div className="d-flex justify-content-between align-items-center fw-semibold">
                                 <span>
-                                    {activeGroup.type.name} · {activeGroup.contributions_count}{' '}
-                                    {activeGroup.contributions_count === 1 ? 'contribution' : 'contributions'}
+                                    {activeGroup.type.name} ·{' '}
+                                    {activeGroup.contributions_count}{' '}
+                                    {activeGroup.contributions_count === 1
+                                        ? 'contribution'
+                                        : 'contributions'}
                                 </span>
-                                <span className="text-primary">{formatCurrency(activeGroup.total_amount)}</span>
+                                <span className="text-primary">
+                                    {formatCurrency(activeGroup.total_amount)}
+                                </span>
                             </div>
                         }
                     />

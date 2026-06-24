@@ -1,6 +1,9 @@
 import Swal from 'sweetalert2';
 
-export async function confirmDelete(title = 'Are you sure?', text = 'This action cannot be undone.'): Promise<boolean> {
+export async function confirmDelete(
+    title = 'Are you sure?',
+    text = 'This action cannot be undone.',
+): Promise<boolean> {
     const result = await Swal.fire({
         title,
         text,
@@ -14,7 +17,10 @@ export async function confirmDelete(title = 'Are you sure?', text = 'This action
     return result.isConfirmed;
 }
 
-export async function confirmAction(title: string, text?: string): Promise<boolean> {
+export async function confirmAction(
+    title: string,
+    text?: string,
+): Promise<boolean> {
     const result = await Swal.fire({
         title,
         text,
@@ -29,7 +35,13 @@ export async function confirmAction(title: string, text?: string): Promise<boole
 }
 
 export function showSuccess(title: string, text?: string): void {
-    void Swal.fire({ title, text, icon: 'success', timer: 2000, showConfirmButton: false });
+    void Swal.fire({
+        title,
+        text,
+        icon: 'success',
+        timer: 2000,
+        showConfirmButton: false,
+    });
 }
 
 export function showError(title: string, text?: string): void {

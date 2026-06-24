@@ -1,8 +1,8 @@
 import { Form, Head, Link } from '@inertiajs/react';
 import FormField from '@/components/shared/FormField';
+import PageHeader from '@/components/shared/PageHeader';
 import { interestTypeOptions, statusOptions } from '@/lib/form-options';
 import { update } from '@/routes/portal/loan-products';
-import PageHeader from '@/components/shared/PageHeader';
 import type { LoanProduct } from '@/types/models';
 
 type Props = {
@@ -32,7 +32,9 @@ export default function Page({ product }: Props) {
                                     label="Description"
                                     name="description"
                                     type="textarea"
-                                    defaultValue={String(product.description ?? '')}
+                                    defaultValue={String(
+                                        product.description ?? '',
+                                    )}
                                     error={errors.description}
                                 />
                                 <FormField
@@ -40,21 +42,29 @@ export default function Page({ product }: Props) {
                                     name="max_amount"
                                     type="number"
                                     required
-                                    defaultValue={String(product.max_amount ?? '')}
+                                    defaultValue={String(
+                                        product.max_amount ?? '',
+                                    )}
                                     error={errors.max_amount}
                                 />
                                 <FormField
                                     label="Max Multiplier"
                                     name="max_multiplier"
                                     type="number"
-                                    defaultValue={product.max_multiplier != null ? String(product.max_multiplier) : '3'}
+                                    defaultValue={
+                                        product.max_multiplier != null
+                                            ? String(product.max_multiplier)
+                                            : '3'
+                                    }
                                     error={errors.max_multiplier}
                                 />
                                 <FormField
                                     label="Interest Type"
                                     name="interest_type"
                                     required
-                                    defaultValue={String(product.interest_type ?? 'percentage')}
+                                    defaultValue={String(
+                                        product.interest_type ?? 'percentage',
+                                    )}
                                     options={interestTypeOptions}
                                     error={errors.interest_type}
                                 />
@@ -63,7 +73,9 @@ export default function Page({ product }: Props) {
                                     name="interest_value"
                                     type="number"
                                     required
-                                    defaultValue={String(product.interest_value ?? '')}
+                                    defaultValue={String(
+                                        product.interest_value ?? '',
+                                    )}
                                     error={errors.interest_value}
                                 />
                                 <FormField
@@ -71,29 +83,42 @@ export default function Page({ product }: Props) {
                                     name="repayment_period"
                                     type="number"
                                     required
-                                    defaultValue={String(product.repayment_period ?? 12)}
+                                    defaultValue={String(
+                                        product.repayment_period ?? 12,
+                                    )}
                                     error={errors.repayment_period}
                                 />
                                 <FormField
                                     label="Grace Period (months)"
                                     name="grace_period"
                                     type="number"
-                                    defaultValue={String(product.grace_period ?? 0)}
+                                    defaultValue={String(
+                                        product.grace_period ?? 0,
+                                    )}
                                     error={errors.grace_period}
                                 />
                                 <FormField
                                     label="Status"
                                     name="status"
                                     required
-                                    defaultValue={String(product.status ?? 'active')}
+                                    defaultValue={String(
+                                        product.status ?? 'active',
+                                    )}
                                     options={statusOptions}
                                     error={errors.status}
                                 />
-                                <div className="d-flex gap-2 mt-3">
-                                    <button type="submit" className="btn btn-primary" disabled={processing}>
+                                <div className="d-flex mt-3 gap-2">
+                                    <button
+                                        type="submit"
+                                        className="btn btn-primary"
+                                        disabled={processing}
+                                    >
                                         {processing ? 'Saving...' : 'Save'}
                                     </button>
-                                    <Link href="/portal/loan-products" className="btn btn-outline-secondary">
+                                    <Link
+                                        href="/portal/loan-products"
+                                        className="btn btn-outline-secondary"
+                                    >
                                         Cancel
                                     </Link>
                                 </div>

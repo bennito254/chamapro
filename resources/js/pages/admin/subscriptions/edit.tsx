@@ -41,15 +41,15 @@ export default function Page({ subscription, owner, plans }: Props) {
 
             <div className="row g-4">
                 <div className="col-lg-4">
-                    <div className="card border-0 shadow-sm h-100">
+                    <div className="card h-100 border-0 shadow-sm">
                         <div className="card-body">
                             <h6 className="fw-semibold mb-3">Group owner</h6>
                             <dl className="mb-0">
-                                <dt className="text-muted small">Name</dt>
+                                <dt className="small text-muted">Name</dt>
                                 <dd>{owner.name ?? '—'}</dd>
-                                <dt className="text-muted small">Email</dt>
+                                <dt className="small text-muted">Email</dt>
                                 <dd>{owner.email ?? '—'}</dd>
-                                <dt className="text-muted small">Phone</dt>
+                                <dt className="small text-muted">Phone</dt>
                                 <dd>{owner.phone ?? '—'}</dd>
                             </dl>
                         </div>
@@ -68,12 +68,20 @@ export default function Page({ subscription, owner, plans }: Props) {
                                                     label="Plan"
                                                     name="subscription_plan_id"
                                                     required
-                                                    options={plans.map((plan) => ({
-                                                        value: String(plan.id),
-                                                        label: `${plan.name} (${formatCurrency(Number(plan.amount ?? 0))})`,
-                                                    }))}
-                                                    defaultValue={String(subscription.subscription_plan_id)}
-                                                    error={errors.subscription_plan_id}
+                                                    options={plans.map(
+                                                        (plan) => ({
+                                                            value: String(
+                                                                plan.id,
+                                                            ),
+                                                            label: `${plan.name} (${formatCurrency(Number(plan.amount ?? 0))})`,
+                                                        }),
+                                                    )}
+                                                    defaultValue={String(
+                                                        subscription.subscription_plan_id,
+                                                    )}
+                                                    error={
+                                                        errors.subscription_plan_id
+                                                    }
                                                 />
                                             </div>
                                             <div className="col-md-6">
@@ -82,7 +90,9 @@ export default function Page({ subscription, owner, plans }: Props) {
                                                     name="status"
                                                     required
                                                     options={statusOptions}
-                                                    defaultValue={subscription.status}
+                                                    defaultValue={
+                                                        subscription.status
+                                                    }
                                                     error={errors.status}
                                                 />
                                             </div>
@@ -92,7 +102,10 @@ export default function Page({ subscription, owner, plans }: Props) {
                                                     name="start_date"
                                                     type="date"
                                                     required
-                                                    defaultValue={subscription.start_date?.slice(0, 10)}
+                                                    defaultValue={subscription.start_date?.slice(
+                                                        0,
+                                                        10,
+                                                    )}
                                                     error={errors.start_date}
                                                 />
                                             </div>
@@ -102,20 +115,37 @@ export default function Page({ subscription, owner, plans }: Props) {
                                                     name="end_date"
                                                     type="date"
                                                     required
-                                                    defaultValue={subscription.end_date?.slice(0, 10)}
+                                                    defaultValue={subscription.end_date?.slice(
+                                                        0,
+                                                        10,
+                                                    )}
                                                     error={errors.end_date}
                                                 />
                                             </div>
                                         </div>
-                                        <p className="text-muted small mt-3 mb-0">
-                                            Current period: {formatDate(subscription.start_date)} –{' '}
-                                            {formatDate(subscription.end_date)} ({titleCase(subscription.status)})
+                                        <p className="small mt-3 mb-0 text-muted">
+                                            Current period:{' '}
+                                            {formatDate(
+                                                subscription.start_date,
+                                            )}{' '}
+                                            –{' '}
+                                            {formatDate(subscription.end_date)}{' '}
+                                            ({titleCase(subscription.status)})
                                         </p>
-                                        <div className="d-flex gap-2 mt-4">
-                                            <button type="submit" className="btn btn-primary" disabled={processing}>
-                                                {processing ? 'Saving...' : 'Save changes'}
+                                        <div className="d-flex mt-4 gap-2">
+                                            <button
+                                                type="submit"
+                                                className="btn btn-primary"
+                                                disabled={processing}
+                                            >
+                                                {processing
+                                                    ? 'Saving...'
+                                                    : 'Save changes'}
                                             </button>
-                                            <Link href={index()} className="btn btn-outline-secondary">
+                                            <Link
+                                                href={index()}
+                                                className="btn btn-outline-secondary"
+                                            >
                                                 Cancel
                                             </Link>
                                         </div>

@@ -20,7 +20,10 @@ export default function AuthLayout({ children }: Props) {
         <div className="cp-auth">
             <aside className="cp-auth-brand">
                 <div className="cp-auth-brand__content">
-                    <Link href="/" className="cp-auth-brand__logo text-decoration-none">
+                    <Link
+                        href="/"
+                        className="cp-auth-brand__logo text-decoration-none"
+                    >
                         <span className="cp-auth-brand__logo-icon">
                             <i className="bi bi-building-fill" />
                         </span>
@@ -29,17 +32,21 @@ export default function AuthLayout({ children }: Props) {
 
                     <div className="cp-auth-brand__hero">
                         <h2 className="cp-auth-brand__headline">
-                            Modern chama management, built for treasurers and members.
+                            Modern chama management, built for treasurers and
+                            members.
                         </h2>
                         <p className="cp-auth-brand__lead">
-                            Securely manage your group finances, meetings, and member communication from one
-                            portal.
+                            Securely manage your group finances, meetings, and
+                            member communication from one portal.
                         </p>
                     </div>
 
                     <ul className="cp-auth-brand__list list-unstyled mb-0">
                         {highlights.map((item) => (
-                            <li key={item.text} className="cp-auth-brand__list-item">
+                            <li
+                                key={item.text}
+                                className="cp-auth-brand__list-item"
+                            >
                                 <span className="cp-auth-brand__list-icon">
                                     <i className={`bi bi-${item.icon}`} />
                                 </span>
@@ -57,7 +64,10 @@ export default function AuthLayout({ children }: Props) {
 
             <main className="cp-auth-main">
                 <div className="cp-auth-main__mobile-brand d-lg-none">
-                    <Link href="/" className="cp-auth-main__mobile-logo text-decoration-none">
+                    <Link
+                        href="/"
+                        className="cp-auth-main__mobile-logo text-decoration-none"
+                    >
                         <span className="cp-auth-brand__logo-icon">
                             <i className="bi bi-building-fill" />
                         </span>

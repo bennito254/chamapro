@@ -1,7 +1,6 @@
 import { Head, Link } from '@inertiajs/react';
-import ContributionsByTypeList, {
-    type ContributionTypeGroup,
-} from '@/components/shared/ContributionsByTypeList';
+import ContributionsByTypeList from '@/components/shared/ContributionsByTypeList';
+import type { ContributionTypeGroup } from '@/components/shared/ContributionsByTypeList';
 import DataTable from '@/components/shared/DataTable';
 import PageHeader from '@/components/shared/PageHeader';
 import StatCard from '@/components/shared/StatCard';
@@ -108,10 +107,16 @@ export default function Page({ meeting, summary }: Props) {
                         >
                             Contributions
                         </Link>
-                        <Link href={`/portal/meetings/${meeting.sqid}/edit`} className="btn btn-outline-secondary btn-sm">
+                        <Link
+                            href={`/portal/meetings/${meeting.sqid}/edit`}
+                            className="btn btn-outline-secondary btn-sm"
+                        >
                             Edit
                         </Link>
-                        <Link href="/portal/meetings" className="btn btn-outline-secondary btn-sm">
+                        <Link
+                            href="/portal/meetings"
+                            className="btn btn-outline-secondary btn-sm"
+                        >
                             Back
                         </Link>
                     </div>
@@ -119,9 +124,9 @@ export default function Page({ meeting, summary }: Props) {
             />
 
             {meeting.agenda && (
-                <div className="card border-0 shadow-sm mb-4">
+                <div className="card mb-4 border-0 shadow-sm">
                     <div className="card-body">
-                        <h2 className="h6 text-muted mb-2">Agenda</h2>
+                        <h2 className="h6 mb-2 text-muted">Agenda</h2>
                         <p className="mb-0">{meeting.agenda}</p>
                     </div>
                 </div>
@@ -247,18 +252,25 @@ export default function Page({ meeting, summary }: Props) {
                         {
                             key: 'product',
                             label: 'Product',
-                            render: (row) => row.product_name ?? row.loanProduct?.name ?? '—',
+                            render: (row) =>
+                                row.product_name ??
+                                row.loanProduct?.name ??
+                                '—',
                         },
                         {
                             key: 'principal_amount',
                             label: 'Principal',
-                            render: (row) => formatCurrency(row.principal_amount ?? 0),
+                            render: (row) =>
+                                formatCurrency(row.principal_amount ?? 0),
                         },
                         {
                             key: 'actions',
                             label: '',
                             render: (row) => (
-                                <Link href={`/portal/loans/${row.sqid}`} className="btn btn-sm btn-outline-primary">
+                                <Link
+                                    href={`/portal/loans/${row.sqid}`}
+                                    className="btn btn-sm btn-outline-primary"
+                                >
                                     View
                                 </Link>
                             ),
@@ -269,7 +281,10 @@ export default function Page({ meeting, summary }: Props) {
                 />
             </Section>
 
-            <Section title="Loan Repayments" count={summary.loan_repayments.length}>
+            <Section
+                title="Loan Repayments"
+                count={summary.loan_repayments.length}
+            >
                 <DataTable
                     columns={[
                         {
@@ -285,17 +300,20 @@ export default function Page({ meeting, summary }: Props) {
                         {
                             key: 'principal_paid',
                             label: 'Principal',
-                            render: (row) => formatCurrency(row.principal_paid ?? 0),
+                            render: (row) =>
+                                formatCurrency(row.principal_paid ?? 0),
                         },
                         {
                             key: 'interest_paid',
                             label: 'Interest',
-                            render: (row) => formatCurrency(row.interest_paid ?? 0),
+                            render: (row) =>
+                                formatCurrency(row.interest_paid ?? 0),
                         },
                         {
                             key: 'balance_after',
                             label: 'Balance After',
-                            render: (row) => formatCurrency(row.balance_after ?? 0),
+                            render: (row) =>
+                                formatCurrency(row.balance_after ?? 0),
                         },
                     ]}
                     data={summary.loan_repayments}
@@ -303,7 +321,10 @@ export default function Page({ meeting, summary }: Props) {
                 />
             </Section>
 
-            <Section title="Member Balances & Activity" count={summary.member_summaries.length}>
+            <Section
+                title="Member Balances & Activity"
+                count={summary.member_summaries.length}
+            >
                 <DataTable
                     columns={[
                         { key: 'membership_number', label: '#' },
@@ -321,17 +342,20 @@ export default function Page({ meeting, summary }: Props) {
                         {
                             key: 'principal_repaid',
                             label: 'Principal',
-                            render: (row) => formatCurrency(row.principal_repaid),
+                            render: (row) =>
+                                formatCurrency(row.principal_repaid),
                         },
                         {
                             key: 'interest_repaid',
                             label: 'Interest',
-                            render: (row) => formatCurrency(row.interest_repaid),
+                            render: (row) =>
+                                formatCurrency(row.interest_repaid),
                         },
                         {
                             key: 'loan_outstanding',
                             label: 'Loan Balance',
-                            render: (row) => formatCurrency(row.loan_outstanding),
+                            render: (row) =>
+                                formatCurrency(row.loan_outstanding),
                         },
                         {
                             key: 'net_position',
@@ -361,12 +385,14 @@ export default function Page({ meeting, summary }: Props) {
                                         {
                                             key: 'member',
                                             label: 'Member',
-                                            render: (row) => row.member?.full_name ?? '—',
+                                            render: (row) =>
+                                                row.member?.full_name ?? '—',
                                         },
                                         {
                                             key: 'amount',
                                             label: 'Amount',
-                                            render: (row) => formatCurrency(row.amount),
+                                            render: (row) =>
+                                                formatCurrency(row.amount),
                                         },
                                     ]}
                                     data={summary.fines_paid}
@@ -382,12 +408,14 @@ export default function Page({ meeting, summary }: Props) {
                                         {
                                             key: 'member',
                                             label: 'Member',
-                                            render: (row) => row.member?.full_name ?? '—',
+                                            render: (row) =>
+                                                row.member?.full_name ?? '—',
                                         },
                                         {
                                             key: 'amount',
                                             label: 'Amount',
-                                            render: (row) => formatCurrency(row.amount),
+                                            render: (row) =>
+                                                formatCurrency(row.amount),
                                         },
                                     ]}
                                     data={summary.share_purchases}
@@ -397,18 +425,22 @@ export default function Page({ meeting, summary }: Props) {
                         )}
                         {summary.welfare_contributions.length > 0 && (
                             <div className="col-lg-6">
-                                <h3 className="h6 mb-3">Welfare Contributions</h3>
+                                <h3 className="h6 mb-3">
+                                    Welfare Contributions
+                                </h3>
                                 <DataTable
                                     columns={[
                                         {
                                             key: 'member',
                                             label: 'Member',
-                                            render: (row) => row.member?.full_name ?? '—',
+                                            render: (row) =>
+                                                row.member?.full_name ?? '—',
                                         },
                                         {
                                             key: 'amount',
                                             label: 'Amount',
-                                            render: (row) => formatCurrency(row.amount),
+                                            render: (row) =>
+                                                formatCurrency(row.amount),
                                         },
                                     ]}
                                     data={summary.welfare_contributions}
@@ -418,18 +450,22 @@ export default function Page({ meeting, summary }: Props) {
                         )}
                         {summary.welfare_disbursements.length > 0 && (
                             <div className="col-lg-6">
-                                <h3 className="h6 mb-3">Welfare Disbursements</h3>
+                                <h3 className="h6 mb-3">
+                                    Welfare Disbursements
+                                </h3>
                                 <DataTable
                                     columns={[
                                         {
                                             key: 'member',
                                             label: 'Member',
-                                            render: (row) => row.member?.full_name ?? '—',
+                                            render: (row) =>
+                                                row.member?.full_name ?? '—',
                                         },
                                         {
                                             key: 'amount',
                                             label: 'Amount',
-                                            render: (row) => formatCurrency(row.amount),
+                                            render: (row) =>
+                                                formatCurrency(row.amount),
                                         },
                                     ]}
                                     data={summary.welfare_disbursements}
@@ -445,7 +481,9 @@ export default function Page({ meeting, summary }: Props) {
                                         {
                                             key: 'category',
                                             label: 'Category',
-                                            render: (row) => row.expense_category?.name ?? '—',
+                                            render: (row) =>
+                                                row.expense_category?.name ??
+                                                '—',
                                         },
                                         {
                                             key: 'payee',
@@ -455,7 +493,8 @@ export default function Page({ meeting, summary }: Props) {
                                         {
                                             key: 'amount',
                                             label: 'Amount',
-                                            render: (row) => formatCurrency(row.amount),
+                                            render: (row) =>
+                                                formatCurrency(row.amount),
                                         },
                                     ]}
                                     data={summary.expenses}
@@ -481,9 +520,13 @@ function Section({
 }) {
     return (
         <div className="mb-4">
-            <div className="d-flex align-items-center gap-2 mb-3">
+            <div className="d-flex align-items-center mb-3 gap-2">
                 <h2 className="h5 mb-0">{title}</h2>
-                {count !== undefined && <span className="badge bg-light text-dark border">{count}</span>}
+                {count !== undefined && (
+                    <span className="badge bg-light text-dark border">
+                        {count}
+                    </span>
+                )}
             </div>
             {children}
         </div>

@@ -1,7 +1,7 @@
 import { Form, Head, Link } from '@inertiajs/react';
 import AuthFormField from '@/components/auth/AuthFormField';
 import AuthPageShell from '@/components/auth/AuthPageShell';
-import { login, register } from '@/routes';
+import { register } from '@/routes';
 import { store } from '@/routes/login';
 import { request as forgotPassword } from '@/routes/password';
 
@@ -28,7 +28,10 @@ export default function Page({ status, canResetPassword }: Props) {
                 }
             >
                 {status && (
-                    <div className="alert alert-success cp-auth-alert" role="status">
+                    <div
+                        className="alert alert-success cp-auth-alert"
+                        role="status"
+                    >
                         <i className="bi bi-check-circle me-2" />
                         {status}
                     </div>
@@ -68,12 +71,18 @@ export default function Page({ status, canResetPassword }: Props) {
                                         name="remember"
                                         id="remember"
                                     />
-                                    <label className="form-check-label" htmlFor="remember">
+                                    <label
+                                        className="form-check-label"
+                                        htmlFor="remember"
+                                    >
                                         Remember me
                                     </label>
                                 </div>
                                 {canResetPassword && (
-                                    <Link href={forgotPassword()} className="cp-auth-link small">
+                                    <Link
+                                        href={forgotPassword()}
+                                        className="cp-auth-link small"
+                                    >
                                         Forgot password?
                                     </Link>
                                 )}
@@ -81,7 +90,7 @@ export default function Page({ status, canResetPassword }: Props) {
 
                             <button
                                 type="submit"
-                                className="btn btn-primary w-100 cp-auth-submit"
+                                className="btn btn-primary cp-auth-submit w-100"
                                 disabled={processing}
                             >
                                 {processing ? (

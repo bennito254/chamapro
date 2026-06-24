@@ -39,14 +39,12 @@ function formatSummaryValue(item: SummaryItem): string {
     return String(item.value);
 }
 
-function summaryColor(index: number): 'primary' | 'success' | 'warning' | 'info' | 'secondary' {
-    const colors: Array<'primary' | 'success' | 'warning' | 'info' | 'secondary'> = [
-        'primary',
-        'success',
-        'warning',
-        'info',
-        'secondary',
-    ];
+function summaryColor(
+    index: number,
+): 'primary' | 'success' | 'warning' | 'info' | 'secondary' {
+    const colors: Array<
+        'primary' | 'success' | 'warning' | 'info' | 'secondary'
+    > = ['primary', 'success', 'warning', 'info', 'secondary'];
 
     return colors[index % colors.length];
 }
@@ -55,17 +53,22 @@ function currencyColumn(key: string, label: string) {
     return {
         key,
         label,
-        render: (row: Record<string, unknown>) => formatCurrency(Number(row[key] ?? 0)),
+        render: (row: Record<string, unknown>) =>
+            formatCurrency(Number(row[key] ?? 0)),
         className: 'text-end',
     };
 }
 
 export default function ReportBody({ type, data }: Props) {
     if (type === 'annual') {
-        const contributionCategories = data.contribution_trends?.map((item) => item.month_label) ?? [];
-        const contributionSeries = data.contribution_trends?.map((item) => item.total) ?? [];
-        const memberCategories = data.member_growth?.map((item) => item.month_label) ?? [];
-        const memberSeries = data.member_growth?.map((item) => item.total) ?? [];
+        const contributionCategories =
+            data.contribution_trends?.map((item) => item.month_label) ?? [];
+        const contributionSeries =
+            data.contribution_trends?.map((item) => item.total) ?? [];
+        const memberCategories =
+            data.member_growth?.map((item) => item.month_label) ?? [];
+        const memberSeries =
+            data.member_growth?.map((item) => item.total) ?? [];
 
         return (
             <>
@@ -85,18 +88,27 @@ export default function ReportBody({ type, data }: Props) {
 
                 <div className="row g-4 mb-4">
                     <div className="col-lg-6">
-                        <div className="card cp-panel border-0 h-100">
-                            <div className="card-header bg-transparent border-0 pt-4 px-4">
-                                <h6 className="fw-semibold mb-0">Contribution trends</h6>
+                        <div className="card cp-panel h-100 border-0">
+                            <div className="card-header border-0 bg-transparent px-4 pt-4">
+                                <h6 className="fw-semibold mb-0">
+                                    Contribution trends
+                                </h6>
                             </div>
                             <div className="card-body px-2 pb-3">
                                 <Chart
                                     type="bar"
                                     height={280}
-                                    series={[{ name: 'Contributions', data: contributionSeries }]}
+                                    series={[
+                                        {
+                                            name: 'Contributions',
+                                            data: contributionSeries,
+                                        },
+                                    ]}
                                     options={{
                                         chart: { toolbar: { show: false } },
-                                        xaxis: { categories: contributionCategories },
+                                        xaxis: {
+                                            categories: contributionCategories,
+                                        },
                                         colors: ['#2563eb'],
                                         dataLabels: { enabled: false },
                                     }}
@@ -105,15 +117,22 @@ export default function ReportBody({ type, data }: Props) {
                         </div>
                     </div>
                     <div className="col-lg-6">
-                        <div className="card cp-panel border-0 h-100">
-                            <div className="card-header bg-transparent border-0 pt-4 px-4">
-                                <h6 className="fw-semibold mb-0">Member growth</h6>
+                        <div className="card cp-panel h-100 border-0">
+                            <div className="card-header border-0 bg-transparent px-4 pt-4">
+                                <h6 className="fw-semibold mb-0">
+                                    Member growth
+                                </h6>
                             </div>
                             <div className="card-body px-2 pb-3">
                                 <Chart
                                     type="line"
                                     height={280}
-                                    series={[{ name: 'New members', data: memberSeries }]}
+                                    series={[
+                                        {
+                                            name: 'New members',
+                                            data: memberSeries,
+                                        },
+                                    ]}
                                     options={{
                                         chart: { toolbar: { show: false } },
                                         xaxis: { categories: memberCategories },
@@ -149,7 +168,7 @@ export default function ReportBody({ type, data }: Props) {
         return (
             <>
                 {data.period_label && (
-                    <p className="text-muted mb-3">
+                    <p className="mb-3 text-muted">
                         Period: <strong>{data.period_label}</strong>
                     </p>
                 )}
@@ -243,7 +262,11 @@ function getTableColumns(type: string) {
                 { key: 'membership_number', label: 'Membership #' },
                 currencyColumn('outstanding', 'Outstanding'),
                 { key: 'due_date', label: 'Due date' },
-                { key: 'days_overdue', label: 'Days overdue', className: 'text-end' },
+                {
+                    key: 'days_overdue',
+                    label: 'Days overdue',
+                    className: 'text-end',
+                },
             ];
         case 'repayments':
             return [

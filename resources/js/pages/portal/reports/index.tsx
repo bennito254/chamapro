@@ -1,4 +1,4 @@
-import { Head, Link, usePage } from '@inertiajs/react';
+import { Head, Link } from '@inertiajs/react';
 import PageHeader from '@/components/shared/PageHeader';
 import { show } from '@/routes/portal/reports';
 
@@ -48,16 +48,21 @@ export default function ReportsIndex({ reportTypes }: Props) {
                     <div key={type} className="col-md-6 col-xl-4">
                         <Link
                             href={show.url({ type })}
-                            className="card border-0 shadow-sm text-decoration-none h-100 cp-report-card"
+                            className="card text-decoration-none cp-report-card h-100 border-0 shadow-sm"
                         >
-                            <div className="card-body p-4 d-flex gap-3">
+                            <div className="card-body d-flex gap-3 p-4">
                                 <div className="cp-report-card__icon">
-                                    <i className={`bi bi-${reportIcons[type] ?? 'file-bar-graph'}`} />
+                                    <i
+                                        className={`bi bi-${reportIcons[type] ?? 'file-bar-graph'}`}
+                                    />
                                 </div>
                                 <div>
-                                    <h6 className="fw-semibold text-dark mb-1">{label}</h6>
-                                    <p className="text-muted small mb-0">
-                                        {reportDescriptions[type] ?? 'View and export report data.'}
+                                    <h6 className="fw-semibold text-dark mb-1">
+                                        {label}
+                                    </h6>
+                                    <p className="small mb-0 text-muted">
+                                        {reportDescriptions[type] ??
+                                            'View and export report data.'}
                                     </p>
                                 </div>
                             </div>

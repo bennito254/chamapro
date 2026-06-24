@@ -1,9 +1,9 @@
 import { Form, Head, Link } from '@inertiajs/react';
-import { confirmDelete } from '@/lib/alerts';
+import { router } from '@inertiajs/react';
 import FormField from '@/components/shared/FormField';
 import PageHeader from '@/components/shared/PageHeader';
+import { confirmDelete } from '@/lib/alerts';
 import { destroy, index, update } from '@/routes/admin/sms-providers';
-import { router } from '@inertiajs/react';
 import type { SmsProvider } from '@/types/models';
 
 const driverOptions = [
@@ -42,7 +42,11 @@ export default function Page({ provider }: Props) {
                     { label: provider.name },
                 ]}
                 actions={
-                    <button type="button" className="btn btn-outline-danger btn-sm" onClick={handleDelete}>
+                    <button
+                        type="button"
+                        className="btn btn-outline-danger btn-sm"
+                        onClick={handleDelete}
+                    >
                         <i className="bi bi-trash me-1" />
                         Delete
                     </button>
@@ -77,7 +81,10 @@ export default function Page({ provider }: Props) {
                                     error={errors.status}
                                 />
                                 <div className="mb-3">
-                                    <label htmlFor="credentials" className="form-label">
+                                    <label
+                                        htmlFor="credentials"
+                                        className="form-label"
+                                    >
                                         Credentials (JSON)
                                     </label>
                                     <textarea
@@ -85,10 +92,16 @@ export default function Page({ provider }: Props) {
                                         name="credentials"
                                         className={`form-control font-monospace ${errors.credentials ? 'is-invalid' : ''}`}
                                         rows={5}
-                                        defaultValue={JSON.stringify(provider.credentials ?? {}, null, 2)}
+                                        defaultValue={JSON.stringify(
+                                            provider.credentials ?? {},
+                                            null,
+                                            2,
+                                        )}
                                     />
                                     {errors.credentials && (
-                                        <div className="invalid-feedback d-block">{errors.credentials}</div>
+                                        <div className="invalid-feedback d-block">
+                                            {errors.credentials}
+                                        </div>
                                     )}
                                 </div>
                                 <div className="form-check mb-4">
@@ -100,15 +113,27 @@ export default function Page({ provider }: Props) {
                                         value="1"
                                         defaultChecked={provider.is_default}
                                     />
-                                    <label className="form-check-label" htmlFor="is_default">
+                                    <label
+                                        className="form-check-label"
+                                        htmlFor="is_default"
+                                    >
                                         Set as default provider
                                     </label>
                                 </div>
                                 <div className="d-flex gap-2">
-                                    <button type="submit" className="btn btn-primary" disabled={processing}>
-                                        {processing ? 'Saving...' : 'Save changes'}
+                                    <button
+                                        type="submit"
+                                        className="btn btn-primary"
+                                        disabled={processing}
+                                    >
+                                        {processing
+                                            ? 'Saving...'
+                                            : 'Save changes'}
                                     </button>
-                                    <Link href={index()} className="btn btn-outline-secondary">
+                                    <Link
+                                        href={index()}
+                                        className="btn btn-outline-secondary"
+                                    >
                                         Cancel
                                     </Link>
                                 </div>

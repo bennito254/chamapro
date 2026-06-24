@@ -22,11 +22,17 @@ export default function Page({ dateGroups }: Props) {
                 description="Contributions are grouped by the meeting date they were collected."
                 actions={
                     <div className="d-flex gap-2">
-                        <Link href="/portal/contributions-bulk" className="btn btn-primary btn-sm">
+                        <Link
+                            href="/portal/contributions-bulk"
+                            className="btn btn-primary btn-sm"
+                        >
                             <i className="bi bi-people-fill me-1" />
                             Bulk entry
                         </Link>
-                        <Link href="/portal/contributions/create" className="btn btn-outline-primary btn-sm">
+                        <Link
+                            href="/portal/contributions/create"
+                            className="btn btn-outline-primary btn-sm"
+                        >
                             <i className="bi bi-plus-lg me-1" />
                             Single
                         </Link>

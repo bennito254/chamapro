@@ -44,7 +44,9 @@ export default function Page({ group }: Props) {
                                         <FormField
                                             label="Registration number"
                                             name="registration_number"
-                                            defaultValue={group.registration_number ?? ''}
+                                            defaultValue={
+                                                group.registration_number ?? ''
+                                            }
                                             error={errors.registration_number}
                                         />
                                     </div>
@@ -83,11 +85,20 @@ export default function Page({ group }: Props) {
                                         />
                                     </div>
                                 </div>
-                                <div className="d-flex gap-2 mt-4">
-                                    <button type="submit" className="btn btn-primary" disabled={processing}>
-                                        {processing ? 'Saving...' : 'Save changes'}
+                                <div className="d-flex mt-4 gap-2">
+                                    <button
+                                        type="submit"
+                                        className="btn btn-primary"
+                                        disabled={processing}
+                                    >
+                                        {processing
+                                            ? 'Saving...'
+                                            : 'Save changes'}
                                     </button>
-                                    <Link href={show.url(group)} className="btn btn-outline-secondary">
+                                    <Link
+                                        href={show.url(group)}
+                                        className="btn btn-outline-secondary"
+                                    >
                                         Cancel
                                     </Link>
                                 </div>

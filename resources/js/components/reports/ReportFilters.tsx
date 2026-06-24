@@ -40,21 +40,40 @@ const months = [
     { value: 12, label: 'December' },
 ];
 
-export default function ReportFilters({ type, filters, filterConfig, members }: Props) {
+export default function ReportFilters({
+    type,
+    filters,
+    filterConfig,
+    members,
+}: Props) {
     const currentYear = new Date().getFullYear();
     const years = Array.from({ length: 8 }, (_, index) => currentYear - index);
 
     return (
-        <Form method="get" action={show.url({ type })} className="card border-0 shadow-sm mb-4">
+        <Form
+            method="get"
+            action={show.url({ type })}
+            className="card mb-4 border-0 shadow-sm"
+        >
             <div className="card-body">
                 <div className="row g-3 align-items-end">
                     {filterConfig.dateRange && (
                         <>
                             <div className="col-md-3">
-                                <FormField label="From" name="from" type="date" defaultValue={filters.from} />
+                                <FormField
+                                    label="From"
+                                    name="from"
+                                    type="date"
+                                    defaultValue={filters.from}
+                                />
                             </div>
                             <div className="col-md-3">
-                                <FormField label="To" name="to" type="date" defaultValue={filters.to} />
+                                <FormField
+                                    label="To"
+                                    name="to"
+                                    type="date"
+                                    defaultValue={filters.to}
+                                />
                             </div>
                         </>
                     )}
@@ -80,17 +99,26 @@ export default function ReportFilters({ type, filters, filterConfig, members }: 
                             </div>
                             {type === 'monthly' && (
                                 <div className="col-md-3">
-                                    <label className="form-label" htmlFor="month">
+                                    <label
+                                        className="form-label"
+                                        htmlFor="month"
+                                    >
                                         Month
                                     </label>
                                     <select
                                         id="month"
                                         name="month"
                                         className="form-select"
-                                        defaultValue={filters.month ?? new Date().getMonth() + 1}
+                                        defaultValue={
+                                            filters.month ??
+                                            new Date().getMonth() + 1
+                                        }
                                     >
                                         {months.map((month) => (
-                                            <option key={month.value} value={month.value}>
+                                            <option
+                                                key={month.value}
+                                                value={month.value}
+                                            >
                                                 {month.label}
                                             </option>
                                         ))}

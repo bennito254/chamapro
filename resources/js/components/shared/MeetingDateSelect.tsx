@@ -1,6 +1,6 @@
+import { useMemo, useState } from 'react';
 import FormField from '@/components/shared/FormField';
 import { formatDate } from '@/lib/format';
-import { useMemo, useState } from 'react';
 
 export type MeetingOption = {
     id: number;
@@ -35,7 +35,8 @@ export function resolveDefaultMeetingDate(
     }
 
     const defaultMeeting =
-        meetings.find((meeting) => meeting.id === defaultMeetingId) ?? meetings[0];
+        meetings.find((meeting) => meeting.id === defaultMeetingId) ??
+        meetings[0];
 
     return {
         meetingId: String(defaultMeeting.id),
@@ -70,6 +71,7 @@ export default function MeetingDateSelect({
         }
 
         const meeting = meetings.find((item) => String(item.id) === value);
+
         if (!meeting) {
             return;
         }
@@ -119,7 +121,9 @@ export default function MeetingDateSelect({
                 <div className="mt-2">
                     <label htmlFor="custom-meeting-date" className="form-label">
                         Contribution date
-                        {required && <span className="text-danger ms-1">*</span>}
+                        {required && (
+                            <span className="text-danger ms-1">*</span>
+                        )}
                     </label>
                     <input
                         id="custom-meeting-date"
@@ -130,13 +134,17 @@ export default function MeetingDateSelect({
                         required={required}
                         onChange={(e) => handleDateChange(e.target.value)}
                     />
-                    {error && <div className="invalid-feedback d-block">{error}</div>}
+                    {error && (
+                        <div className="invalid-feedback d-block">{error}</div>
+                    )}
                 </div>
             ) : (
                 <input type="hidden" name={name} value={date} />
             )}
             {meetingId !== 'custom' && (
-                <div className="form-text">Contributions will be recorded for {formatDate(date)}.</div>
+                <div className="form-text">
+                    Contributions will be recorded for {formatDate(date)}.
+                </div>
             )}
             {error && meetingId !== 'custom' && (
                 <div className="invalid-feedback d-block">{error}</div>

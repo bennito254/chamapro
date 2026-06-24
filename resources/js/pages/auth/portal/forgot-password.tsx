@@ -26,7 +26,10 @@ export default function Page({ status }: Props) {
                 }
             >
                 {status && (
-                    <div className="alert alert-success cp-auth-alert" role="status">
+                    <div
+                        className="alert alert-success cp-auth-alert"
+                        role="status"
+                    >
                         <i className="bi bi-envelope-check me-2" />
                         {status}
                     </div>
@@ -34,7 +37,8 @@ export default function Page({ status }: Props) {
 
                 <div className="cp-auth-info-callout mb-4">
                     <i className="bi bi-info-circle me-2" />
-                    Check your inbox and spam folder for the password reset email.
+                    Check your inbox and spam folder for the password reset
+                    email.
                 </div>
 
                 <Form {...email.form()}>
@@ -54,7 +58,7 @@ export default function Page({ status }: Props) {
 
                             <button
                                 type="submit"
-                                className="btn btn-primary w-100 cp-auth-submit"
+                                className="btn btn-primary cp-auth-submit w-100"
                                 disabled={processing}
                             >
                                 {processing ? (

@@ -31,19 +31,31 @@ export default function Page({ application }: Props) {
                 fields={[
                     { label: 'Member', value: application.member?.full_name },
                     { label: 'Product', value: product?.name },
-                    { label: 'Requested amount', value: formatCurrency(application.requested_amount) },
+                    {
+                        label: 'Requested amount',
+                        value: formatCurrency(application.requested_amount),
+                    },
                     { label: 'Purpose', value: application.purpose },
-                    { label: 'Status', value: application.status, format: 'badge' },
+                    {
+                        label: 'Status',
+                        value: application.status,
+                        format: 'badge',
+                    },
                     {
                         label: 'Repayment period',
-                        value: product?.repayment_period ? `${product.repayment_period} months` : '—',
+                        value: product?.repayment_period
+                            ? `${product.repayment_period} months`
+                            : '—',
                     },
                     { label: 'Review notes', value: application.review_notes },
                 ]}
             />
             {application.loan && (
                 <div className="mt-4">
-                    <Link href={`/portal/loans/${application.loan.sqid}`} className="btn btn-primary btn-sm">
+                    <Link
+                        href={`/portal/loans/${application.loan.sqid}`}
+                        className="btn btn-primary btn-sm"
+                    >
                         View active loan
                     </Link>
                 </div>

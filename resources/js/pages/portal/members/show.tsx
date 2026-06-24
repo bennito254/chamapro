@@ -41,7 +41,11 @@ function loanStatusBadge(status: string) {
         defaulted: 'bg-danger',
     };
 
-    return <span className={`badge ${map[status] ?? 'bg-secondary'}`}>{titleCase(status)}</span>;
+    return (
+        <span className={`badge ${map[status] ?? 'bg-secondary'}`}>
+            {titleCase(status)}
+        </span>
+    );
 }
 
 export default function Page({ member, activity }: Props) {
@@ -67,7 +71,10 @@ export default function Page({ member, activity }: Props) {
                         >
                             Edit
                         </Link>
-                        <Link href="/portal/members" className="btn btn-outline-secondary btn-sm">
+                        <Link
+                            href="/portal/members"
+                            className="btn btn-outline-secondary btn-sm"
+                        >
                             Back
                         </Link>
                     </div>
@@ -122,31 +129,41 @@ export default function Page({ member, activity }: Props) {
                     { label: 'Membership #', value: member.membership_number },
                     { label: 'Phone', value: member.phone_number },
                     { label: 'Email', value: member.email },
-                    { label: 'Date joined', value: member.date_joined, format: 'date' },
+                    {
+                        label: 'Date joined',
+                        value: member.date_joined,
+                        format: 'date',
+                    },
                     { label: 'Status', value: member.status, format: 'badge' },
                 ]}
             />
 
             {contributions_by_date.length > 0 && (
-                <ActivitySection title="Contributions by date" count={contributions_by_date.length}>
+                <ActivitySection
+                    title="Contributions by date"
+                    count={contributions_by_date.length}
+                >
                     <DataTable
                         columns={[
                             {
                                 key: 'date',
                                 label: 'Date',
-                                render: (row: ContributionDateGroup) => formatDate(row.date),
+                                render: (row: ContributionDateGroup) =>
+                                    formatDate(row.date),
                             },
                             {
                                 key: 'contributions_count',
                                 label: 'Entries',
                                 className: 'text-end',
-                                render: (row: ContributionDateGroup) => String(row.contributions_count),
+                                render: (row: ContributionDateGroup) =>
+                                    String(row.contributions_count),
                             },
                             {
                                 key: 'total_amount',
                                 label: 'Total',
                                 className: 'text-end',
-                                render: (row: ContributionDateGroup) => formatCurrency(row.total_amount),
+                                render: (row: ContributionDateGroup) =>
+                                    formatCurrency(row.total_amount),
                             },
                         ]}
                         data={contributions_by_date}
@@ -164,35 +181,45 @@ export default function Page({ member, activity }: Props) {
                             {
                                 key: 'product',
                                 label: 'Product',
-                                render: (row: Loan) => row.product_name ?? row.loanProduct?.name ?? '—',
+                                render: (row: Loan) =>
+                                    row.product_name ??
+                                    row.loanProduct?.name ??
+                                    '—',
                             },
                             {
                                 key: 'principal_amount',
                                 label: 'Principal',
                                 className: 'text-end',
-                                render: (row: Loan) => formatCurrency(row.principal_amount),
+                                render: (row: Loan) =>
+                                    formatCurrency(row.principal_amount),
                             },
                             {
                                 key: 'outstanding_balance',
                                 label: 'Outstanding',
                                 className: 'text-end',
-                                render: (row: Loan) => formatCurrency(row.outstanding_balance),
+                                render: (row: Loan) =>
+                                    formatCurrency(row.outstanding_balance),
                             },
                             {
                                 key: 'disbursement_date',
                                 label: 'Disbursed',
-                                render: (row: Loan) => formatDate(row.disbursement_date),
+                                render: (row: Loan) =>
+                                    formatDate(row.disbursement_date),
                             },
                             {
                                 key: 'status',
                                 label: 'Status',
-                                render: (row: Loan) => loanStatusBadge(row.status),
+                                render: (row: Loan) =>
+                                    loanStatusBadge(row.status),
                             },
                             {
                                 key: 'actions',
                                 label: '',
                                 render: (row: Loan) => (
-                                    <Link href={`/portal/loans/${row.sqid}`} className="btn btn-sm btn-outline-primary">
+                                    <Link
+                                        href={`/portal/loans/${row.sqid}`}
+                                        className="btn btn-sm btn-outline-primary"
+                                    >
                                         View
                                     </Link>
                                 ),
@@ -206,42 +233,51 @@ export default function Page({ member, activity }: Props) {
             )}
 
             {repayments.length > 0 && (
-                <ActivitySection title="Loan repayments" count={repayments.length}>
+                <ActivitySection
+                    title="Loan repayments"
+                    count={repayments.length}
+                >
                     <DataTable
                         columns={[
                             {
                                 key: 'date',
                                 label: 'Date',
-                                render: (row: LoanRepayment) => formatDate(row.date),
+                                render: (row: LoanRepayment) =>
+                                    formatDate(row.date),
                             },
                             {
                                 key: 'loan',
                                 label: 'Loan',
-                                render: (row: LoanRepayment) => row.loan?.product_name ?? '—',
+                                render: (row: LoanRepayment) =>
+                                    row.loan?.product_name ?? '—',
                             },
                             {
                                 key: 'interest_paid',
                                 label: 'Interest',
                                 className: 'text-end',
-                                render: (row: LoanRepayment) => formatCurrency(row.interest_paid ?? 0),
+                                render: (row: LoanRepayment) =>
+                                    formatCurrency(row.interest_paid ?? 0),
                             },
                             {
                                 key: 'principal_paid',
                                 label: 'Principal',
                                 className: 'text-end',
-                                render: (row: LoanRepayment) => formatCurrency(row.principal_paid ?? 0),
+                                render: (row: LoanRepayment) =>
+                                    formatCurrency(row.principal_paid ?? 0),
                             },
                             {
                                 key: 'amount',
                                 label: 'Total',
                                 className: 'text-end',
-                                render: (row: LoanRepayment) => formatCurrency(row.amount),
+                                render: (row: LoanRepayment) =>
+                                    formatCurrency(row.amount),
                             },
                             {
                                 key: 'balance_after',
                                 label: 'Balance after',
                                 className: 'text-end',
-                                render: (row: LoanRepayment) => formatCurrency(row.balance_after ?? 0),
+                                render: (row: LoanRepayment) =>
+                                    formatCurrency(row.balance_after ?? 0),
                             },
                         ]}
                         data={repayments}
@@ -251,14 +287,19 @@ export default function Page({ member, activity }: Props) {
                 </ActivitySection>
             )}
 
-            {contributions_by_date.length === 0 && loans.length === 0 && repayments.length === 0 && (
-                <div className="card border-0 shadow-sm">
-                    <div className="card-body text-center text-muted py-5">
-                        <i className="bi bi-inbox display-6 d-block mb-3" />
-                        <p className="mb-0">No contributions, loans, or repayments recorded for this member yet.</p>
+            {contributions_by_date.length === 0 &&
+                loans.length === 0 &&
+                repayments.length === 0 && (
+                    <div className="card border-0 shadow-sm">
+                        <div className="card-body py-5 text-center text-muted">
+                            <i className="bi bi-inbox display-6 d-block mb-3" />
+                            <p className="mb-0">
+                                No contributions, loans, or repayments recorded
+                                for this member yet.
+                            </p>
+                        </div>
                     </div>
-                </div>
-            )}
+                )}
         </>
     );
 }

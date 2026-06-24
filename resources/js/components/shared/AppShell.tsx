@@ -1,5 +1,6 @@
 import { Link } from '@inertiajs/react';
-import { useState, type ReactNode } from 'react';
+import { useState } from 'react';
+import type { ReactNode } from 'react';
 import SidebarNav from '@/components/shared/SidebarNav';
 import { useFlashToasts } from '@/hooks/use-flash-toasts';
 import type { NavGroup } from '@/lib/navigation';
@@ -36,7 +37,10 @@ export default function AppShell({
     const [theme, setThemeState] = useState(getTheme);
     useFlashToasts();
 
-    const sidebarClass = variant === 'admin' ? 'cp-sidebar cp-sidebar--admin' : 'cp-sidebar cp-sidebar--portal';
+    const sidebarClass =
+        variant === 'admin'
+            ? 'cp-sidebar cp-sidebar--admin'
+            : 'cp-sidebar cp-sidebar--portal';
 
     return (
         <div className="cp-app">
@@ -55,13 +59,20 @@ export default function AppShell({
                         <i className={`bi bi-${brandIcon}`} />
                     </div>
                     <div className="cp-sidebar-brand__text">
-                        <span className="cp-sidebar-brand__title">{brandTitle}</span>
-                        <span className="cp-sidebar-brand__subtitle">{brandSubtitle}</span>
+                        <span className="cp-sidebar-brand__title">
+                            {brandTitle}
+                        </span>
+                        <span className="cp-sidebar-brand__subtitle">
+                            {brandSubtitle}
+                        </span>
                     </div>
                 </div>
 
                 <div className="cp-sidebar-scroll">
-                    <SidebarNav groups={navGroups} storageKey={`cp-nav-${variant}`} />
+                    <SidebarNav
+                        groups={navGroups}
+                        storageKey={`cp-nav-${variant}`}
+                    />
                 </div>
 
                 <div className="cp-sidebar-footer">
@@ -70,8 +81,14 @@ export default function AppShell({
                             {(userName ?? 'U').charAt(0).toUpperCase()}
                         </div>
                         <div className="cp-sidebar-user__info">
-                            <span className="cp-sidebar-user__name">{userName ?? 'User'}</span>
-                            <span className="cp-sidebar-user__role">{variant === 'admin' ? 'Super Admin' : 'Portal User'}</span>
+                            <span className="cp-sidebar-user__name">
+                                {userName ?? 'User'}
+                            </span>
+                            <span className="cp-sidebar-user__role">
+                                {variant === 'admin'
+                                    ? 'Super Admin'
+                                    : 'Portal User'}
+                            </span>
                         </div>
                     </div>
                 </div>
@@ -97,7 +114,9 @@ export default function AppShell({
                             onClick={() => setThemeState(toggleTheme())}
                             title="Toggle theme"
                         >
-                            <i className={`bi bi-${theme === 'dark' ? 'sun' : 'moon'}`} />
+                            <i
+                                className={`bi bi-${theme === 'dark' ? 'sun' : 'moon'}`}
+                            />
                         </button>
                         <Link
                             href={logoutHref}

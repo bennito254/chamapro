@@ -4,8 +4,8 @@ import DataTable from '@/components/shared/DataTable';
 import PageHeader from '@/components/shared/PageHeader';
 import { titleCase } from '@/lib/format';
 import { create, destroy, edit, index } from '@/routes/admin/sms-providers';
-import type { Paginated } from '@/types/pagination';
 import type { SmsProvider } from '@/types/models';
+import type { Paginated } from '@/types/pagination';
 
 type Props = { providers: Paginated<SmsProvider> };
 
@@ -30,13 +30,22 @@ export default function Page({ providers }: Props) {
                     {
                         key: 'is_default',
                         label: 'Default',
-                        render: (row) => (row.is_default ? <span className="badge bg-primary">Default</span> : '—'),
+                        render: (row) =>
+                            row.is_default ? (
+                                <span className="badge bg-primary">
+                                    Default
+                                </span>
+                            ) : (
+                                '—'
+                            ),
                     },
                     {
                         key: 'status',
                         label: 'Status',
                         render: (row) => (
-                            <span className={`badge ${row.status === 'active' ? 'bg-success' : 'bg-secondary'}`}>
+                            <span
+                                className={`badge ${row.status === 'active' ? 'bg-success' : 'bg-secondary'}`}
+                            >
                                 {titleCase(String(row.status ?? ''))}
                             </span>
                         ),
@@ -45,7 +54,10 @@ export default function Page({ providers }: Props) {
                         key: 'actions',
                         label: '',
                         render: (row) => (
-                            <AdminRowActions editHref={edit.url(row)} deleteHref={destroy.url(row)} />
+                            <AdminRowActions
+                                editHref={edit.url(row)}
+                                deleteHref={destroy.url(row)}
+                            />
                         ),
                     },
                 ]}
@@ -53,7 +65,10 @@ export default function Page({ providers }: Props) {
                 emptyMessage="No SMS providers configured."
             />
             <div className="mt-3">
-                <Link href={index()} className="text-muted small text-decoration-none">
+                <Link
+                    href={index()}
+                    className="small text-decoration-none text-muted"
+                >
                     Refresh list
                 </Link>
             </div>

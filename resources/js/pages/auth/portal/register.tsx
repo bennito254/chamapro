@@ -25,7 +25,10 @@ export default function Page({ passwordRules }: Props) {
                     </span>
                 }
             >
-                <Form {...store.form()} resetOnSuccess={['password', 'password_confirmation']}>
+                <Form
+                    {...store.form()}
+                    resetOnSuccess={['password', 'password_confirmation']}
+                >
                     {({ errors, processing }) => (
                         <>
                             <AuthFormField
@@ -75,7 +78,7 @@ export default function Page({ passwordRules }: Props) {
 
                             <button
                                 type="submit"
-                                className="btn btn-primary w-100 cp-auth-submit mt-1"
+                                className="btn btn-primary cp-auth-submit mt-1 w-100"
                                 disabled={processing}
                             >
                                 {processing ? (

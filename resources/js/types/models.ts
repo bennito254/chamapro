@@ -450,4 +450,7 @@ export type DividendAllocation = {
     member?: Member;
 };
 
-export type MemberOption = Pick<Member, 'id' | 'full_name' | 'membership_number'>;
+export type MemberOption = Pick<
+    Member,
+    'id' | 'full_name' | 'membership_number'
+>;

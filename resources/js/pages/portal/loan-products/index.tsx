@@ -2,8 +2,8 @@ import { Head, Link } from '@inertiajs/react';
 import DataTable from '@/components/shared/DataTable';
 import PageHeader from '@/components/shared/PageHeader';
 import { titleCase } from '@/lib/format';
-import type { Paginated } from '@/types/pagination';
 import type { LoanProduct } from '@/types/models';
+import type { Paginated } from '@/types/pagination';
 
 type Props = { products: Paginated<LoanProduct> };
 
@@ -14,7 +14,10 @@ export default function Page({ products }: Props) {
             <PageHeader
                 title="Loan Products"
                 actions={
-                    <Link href="/portal/loan-products/create" className="btn btn-primary">
+                    <Link
+                        href="/portal/loan-products/create"
+                        className="btn btn-primary"
+                    >
                         <i className="bi bi-plus-lg me-1" />
                         Add
                     </Link>

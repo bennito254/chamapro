@@ -1,5 +1,6 @@
 import { usePage } from '@inertiajs/react';
-import { useMemo, type ReactNode } from 'react';
+import { useMemo } from 'react';
+import type { ReactNode } from 'react';
 import AppShell from '@/components/shared/AppShell';
 import SubscriptionBanner from '@/components/shared/SubscriptionBanner';
 import SubscriptionStrip from '@/components/shared/SubscriptionStrip';

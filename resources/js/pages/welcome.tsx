@@ -1,7 +1,7 @@
 import { Head, Link, usePage } from '@inertiajs/react';
-import { dashboard } from '@/routes/portal';
 import { login, register } from '@/routes';
 import { login as adminLogin } from '@/routes/admin';
+import { dashboard } from '@/routes/portal';
 
 const features = [
     {
@@ -59,7 +59,10 @@ export default function Welcome() {
             <div className="cp-landing">
                 <nav className="cp-landing-nav navbar navbar-expand-lg">
                     <div className="container">
-                        <Link href="/" className="navbar-brand cp-landing-brand">
+                        <Link
+                            href="/"
+                            className="navbar-brand cp-landing-brand"
+                        >
                             <span className="cp-landing-brand__icon">
                                 <i className="bi bi-building-fill" />
                             </span>
@@ -78,33 +81,51 @@ export default function Welcome() {
                             <i className="bi bi-list fs-3" />
                         </button>
 
-                        <div className="collapse navbar-collapse" id="landingNav">
-                            <ul className="navbar-nav ms-auto align-items-lg-center gap-lg-1">
+                        <div
+                            className="navbar-collapse collapse"
+                            id="landingNav"
+                        >
+                            <ul className="navbar-nav align-items-lg-center gap-lg-1 ms-auto">
                                 <li className="nav-item">
-                                    <a className="nav-link cp-landing-nav-link" href="#features">
+                                    <a
+                                        className="nav-link cp-landing-nav-link"
+                                        href="#features"
+                                    >
                                         Features
                                     </a>
                                 </li>
                                 <li className="nav-item">
-                                    <a className="nav-link cp-landing-nav-link" href="#highlights">
+                                    <a
+                                        className="nav-link cp-landing-nav-link"
+                                        href="#highlights"
+                                    >
                                         Why ChamaPro
                                     </a>
                                 </li>
                                 {auth.user ? (
                                     <li className="nav-item ms-lg-2">
-                                        <Link href={dashboard()} className="btn btn-light btn-sm px-3">
+                                        <Link
+                                            href={dashboard()}
+                                            className="btn btn-light btn-sm px-3"
+                                        >
                                             Go to dashboard
                                         </Link>
                                     </li>
                                 ) : (
                                     <>
                                         <li className="nav-item ms-lg-2">
-                                            <Link href={login()} className="btn btn-outline-light btn-sm px-3">
+                                            <Link
+                                                href={login()}
+                                                className="btn btn-outline-light btn-sm px-3"
+                                            >
                                                 Sign in
                                             </Link>
                                         </li>
                                         <li className="nav-item ms-lg-2">
-                                            <Link href={register()} className="btn btn-light btn-sm px-3">
+                                            <Link
+                                                href={register()}
+                                                className="btn btn-light btn-sm px-3"
+                                            >
                                                 Get started
                                             </Link>
                                         </li>
@@ -124,26 +145,38 @@ export default function Welcome() {
                                     Built for Kenyan chamas
                                 </span>
                                 <h1 className="cp-landing-hero__title">
-                                    Run your chama with clarity, confidence, and control.
+                                    Run your chama with clarity, confidence, and
+                                    control.
                                 </h1>
                                 <p className="cp-landing-hero__lead">
-                                    ChamaPro brings contributions, loans, meetings, ledger accounting, and member
-                                    communication into one secure portal — so treasurers spend less time on spreadsheets
+                                    ChamaPro brings contributions, loans,
+                                    meetings, ledger accounting, and member
+                                    communication into one secure portal — so
+                                    treasurers spend less time on spreadsheets
                                     and more time growing the group.
                                 </p>
-                                <div className="d-flex flex-wrap gap-2 mt-4">
+                                <div className="d-flex mt-4 flex-wrap gap-2">
                                     {auth.user ? (
-                                        <Link href={dashboard()} className="btn btn-light btn-lg px-4">
+                                        <Link
+                                            href={dashboard()}
+                                            className="btn btn-light btn-lg px-4"
+                                        >
                                             Open dashboard
                                             <i className="bi bi-arrow-right ms-2" />
                                         </Link>
                                     ) : (
                                         <>
-                                            <Link href={register()} className="btn btn-light btn-lg px-4">
+                                            <Link
+                                                href={register()}
+                                                className="btn btn-light btn-lg px-4"
+                                            >
                                                 Start free trial
                                                 <i className="bi bi-arrow-right ms-2" />
                                             </Link>
-                                            <Link href={login()} className="btn btn-outline-light btn-lg px-4">
+                                            <Link
+                                                href={login()}
+                                                className="btn btn-outline-light btn-lg px-4"
+                                            >
                                                 Sign in
                                             </Link>
                                         </>
@@ -161,22 +194,34 @@ export default function Welcome() {
                                     <div className="cp-landing-hero-card__body">
                                         <div className="cp-landing-stat-row">
                                             <div>
-                                                <div className="cp-landing-stat-label">Net cash in</div>
-                                                <div className="cp-landing-stat-value text-success">KES 124,500</div>
+                                                <div className="cp-landing-stat-label">
+                                                    Net cash in
+                                                </div>
+                                                <div className="cp-landing-stat-value text-success">
+                                                    KES 124,500
+                                                </div>
                                             </div>
                                             <i className="bi bi-graph-up-arrow fs-3 text-success opacity-75" />
                                         </div>
                                         <div className="cp-landing-stat-row">
                                             <div>
-                                                <div className="cp-landing-stat-label">Active loans</div>
-                                                <div className="cp-landing-stat-value">12 members</div>
+                                                <div className="cp-landing-stat-label">
+                                                    Active loans
+                                                </div>
+                                                <div className="cp-landing-stat-value">
+                                                    12 members
+                                                </div>
                                             </div>
                                             <i className="bi bi-bank fs-3 text-primary opacity-75" />
                                         </div>
                                         <div className="cp-landing-stat-row mb-0">
                                             <div>
-                                                <div className="cp-landing-stat-label">SMS reminders sent</div>
-                                                <div className="cp-landing-stat-value">48 this month</div>
+                                                <div className="cp-landing-stat-label">
+                                                    SMS reminders sent
+                                                </div>
+                                                <div className="cp-landing-stat-value">
+                                                    48 this month
+                                                </div>
                                             </div>
                                             <i className="bi bi-chat-dots fs-3 text-info opacity-75" />
                                         </div>
@@ -187,14 +232,24 @@ export default function Welcome() {
                     </div>
                 </header>
 
-                <section id="highlights" className="cp-landing-section cp-landing-section--muted">
+                <section
+                    id="highlights"
+                    className="cp-landing-section cp-landing-section--muted"
+                >
                     <div className="container">
                         <div className="row g-4">
                             {highlights.map((item) => (
-                                <div key={item.label} className="col-6 col-lg-3">
+                                <div
+                                    key={item.label}
+                                    className="col-lg-3 col-6"
+                                >
                                     <div className="cp-landing-highlight text-center">
-                                        <div className="cp-landing-highlight__value">{item.value}</div>
-                                        <div className="cp-landing-highlight__label">{item.label}</div>
+                                        <div className="cp-landing-highlight__value">
+                                            {item.value}
+                                        </div>
+                                        <div className="cp-landing-highlight__label">
+                                            {item.label}
+                                        </div>
                                     </div>
                                 </div>
                             ))}
@@ -204,23 +259,36 @@ export default function Welcome() {
 
                 <section id="features" className="cp-landing-section">
                     <div className="container">
-                        <div className="text-center mb-5 cp-landing-section__intro">
-                            <h2 className="cp-landing-section__title">Everything your chama needs</h2>
+                        <div className="cp-landing-section__intro mb-5 text-center">
+                            <h2 className="cp-landing-section__title">
+                                Everything your chama needs
+                            </h2>
                             <p className="cp-landing-section__subtitle mx-auto">
-                                From the first member contribution to year-end dividends — ChamaPro keeps every
-                                transaction tied to your chart of accounts and member records.
+                                From the first member contribution to year-end
+                                dividends — ChamaPro keeps every transaction
+                                tied to your chart of accounts and member
+                                records.
                             </p>
                         </div>
 
                         <div className="row g-4">
                             {features.map((feature) => (
-                                <div key={feature.title} className="col-md-6 col-lg-4">
+                                <div
+                                    key={feature.title}
+                                    className="col-md-6 col-lg-4"
+                                >
                                     <article className="cp-landing-feature h-100">
                                         <div className="cp-landing-feature__icon">
-                                            <i className={`bi ${feature.icon}`} />
+                                            <i
+                                                className={`bi ${feature.icon}`}
+                                            />
                                         </div>
-                                        <h3 className="cp-landing-feature__title">{feature.title}</h3>
-                                        <p className="cp-landing-feature__text mb-0">{feature.description}</p>
+                                        <h3 className="cp-landing-feature__title">
+                                            {feature.title}
+                                        </h3>
+                                        <p className="cp-landing-feature__text mb-0">
+                                            {feature.description}
+                                        </p>
                                     </article>
                                 </div>
                             ))}
@@ -230,21 +298,33 @@ export default function Welcome() {
 
                 <section className="cp-landing-cta">
                     <div className="container text-center">
-                        <h2 className="cp-landing-cta__title">Ready to modernize your chama?</h2>
+                        <h2 className="cp-landing-cta__title">
+                            Ready to modernize your chama?
+                        </h2>
                         <p className="cp-landing-cta__text mx-auto">
-                            Create your group, invite officers, and start recording contributions in minutes.
+                            Create your group, invite officers, and start
+                            recording contributions in minutes.
                         </p>
-                        <div className="d-flex flex-wrap justify-content-center gap-2">
+                        <div className="d-flex justify-content-center flex-wrap gap-2">
                             {auth.user ? (
-                                <Link href={dashboard()} className="btn btn-light btn-lg px-4">
+                                <Link
+                                    href={dashboard()}
+                                    className="btn btn-light btn-lg px-4"
+                                >
                                     Go to dashboard
                                 </Link>
                             ) : (
                                 <>
-                                    <Link href={register()} className="btn btn-light btn-lg px-4">
+                                    <Link
+                                        href={register()}
+                                        className="btn btn-light btn-lg px-4"
+                                    >
                                         Create your account
                                     </Link>
-                                    <Link href={login()} className="btn btn-outline-light btn-lg px-4">
+                                    <Link
+                                        href={login()}
+                                        className="btn btn-outline-light btn-lg px-4"
+                                    >
                                         Sign in to portal
                                     </Link>
                                 </>
@@ -254,16 +334,24 @@ export default function Welcome() {
                 </section>
 
                 <footer className="cp-landing-footer">
-                    <div className="container d-flex flex-column flex-md-row align-items-center justify-content-between gap-3">
-                        <div className="d-flex align-items-center gap-2 text-white-50 small">
+                    <div className="d-flex flex-column flex-md-row align-items-center justify-content-between container gap-3">
+                        <div className="d-flex align-items-center text-white-50 small gap-2">
                             <i className="bi bi-building-fill" />
-                            <span>&copy; {new Date().getFullYear()} ChamaPro</span>
+                            <span>
+                                &copy; {new Date().getFullYear()} ChamaPro
+                            </span>
                         </div>
-                        <div className="d-flex gap-3 small">
-                            <Link href={login()} className="cp-landing-footer-link">
+                        <div className="d-flex small gap-3">
+                            <Link
+                                href={login()}
+                                className="cp-landing-footer-link"
+                            >
                                 Member portal
                             </Link>
-                            <Link href={adminLogin()} className="cp-landing-footer-link">
+                            <Link
+                                href={adminLogin()}
+                                className="cp-landing-footer-link"
+                            >
                                 Admin
                             </Link>
                         </div>

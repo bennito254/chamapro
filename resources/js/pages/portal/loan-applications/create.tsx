@@ -1,7 +1,7 @@
 import { Form, Head, Link } from '@inertiajs/react';
 import FormField from '@/components/shared/FormField';
-import { store } from '@/routes/portal/loan-applications';
 import PageHeader from '@/components/shared/PageHeader';
+import { store } from '@/routes/portal/loan-applications';
 import type { LoanProduct } from '@/types/models';
 
 type MemberOption = {
@@ -66,11 +66,20 @@ export default function Page({ members, products }: Props) {
                                     required
                                     error={errors.purpose}
                                 />
-                                <div className="d-flex gap-2 mt-3">
-                                    <button type="submit" className="btn btn-primary" disabled={processing}>
-                                        {processing ? 'Saving...' : 'Submit application'}
+                                <div className="d-flex mt-3 gap-2">
+                                    <button
+                                        type="submit"
+                                        className="btn btn-primary"
+                                        disabled={processing}
+                                    >
+                                        {processing
+                                            ? 'Saving...'
+                                            : 'Submit application'}
                                     </button>
-                                    <Link href="/portal/loan-applications" className="btn btn-outline-secondary">
+                                    <Link
+                                        href="/portal/loan-applications"
+                                        className="btn btn-outline-secondary"
+                                    >
                                         Cancel
                                     </Link>
                                 </div>

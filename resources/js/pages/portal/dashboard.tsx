@@ -23,13 +23,20 @@ type Props = {
     recentContributions: Contribution[];
 };
 
-export default function PortalDashboard({ group, stats, recentContributions }: Props) {
+export default function PortalDashboard({
+    group,
+    stats,
+    recentContributions,
+}: Props) {
     const today = formatDateTime(new Date());
 
     return (
         <>
             <Head title="Dashboard" />
-            <PageHeader title={`Welcome back`} description={`${group.name} · ${today}`} />
+            <PageHeader
+                title={`Welcome back`}
+                description={`${group.name} · ${today}`}
+            />
 
             <div className="row g-3 mb-4">
                 <div className="col-sm-6 col-xl-3">
@@ -75,22 +82,44 @@ export default function PortalDashboard({ group, stats, recentContributions }: P
 
             <div className="row g-4">
                 <div className="col-lg-4">
-                    <div className="card cp-panel border-0 h-100">
-                        <div className="card-header bg-transparent border-0 pt-4 px-4">
-                            <h6 className="fw-semibold mb-0">Activity Snapshot</h6>
+                    <div className="card cp-panel h-100 border-0">
+                        <div className="card-header border-0 bg-transparent px-4 pt-4">
+                            <h6 className="fw-semibold mb-0">
+                                Activity Snapshot
+                            </h6>
                         </div>
                         <div className="card-body">
                             <Chart
                                 type="bar"
                                 height={280}
-                                series={[{
-                                    name: 'Count',
-                                    data: [stats.members_active, stats.loans_active, stats.fines_unpaid],
-                                }]}
+                                series={[
+                                    {
+                                        name: 'Count',
+                                        data: [
+                                            stats.members_active,
+                                            stats.loans_active,
+                                            stats.fines_unpaid,
+                                        ],
+                                    },
+                                ]}
                                 options={{
-                                    chart: { toolbar: { show: false }, fontFamily: 'inherit' },
-                                    plotOptions: { bar: { borderRadius: 8, columnWidth: '45%' } },
-                                    xaxis: { categories: ['Members', 'Loans', 'Fines'] },
+                                    chart: {
+                                        toolbar: { show: false },
+                                        fontFamily: 'inherit',
+                                    },
+                                    plotOptions: {
+                                        bar: {
+                                            borderRadius: 8,
+                                            columnWidth: '45%',
+                                        },
+                                    },
+                                    xaxis: {
+                                        categories: [
+                                            'Members',
+                                            'Loans',
+                                            'Fines',
+                                        ],
+                                    },
                                     colors: ['#047857'],
                                     dataLabels: { enabled: false },
                                 }}
@@ -99,18 +128,34 @@ export default function PortalDashboard({ group, stats, recentContributions }: P
                     </div>
                 </div>
                 <div className="col-lg-8">
-                    <div className="card cp-panel border-0 h-100">
-                        <div className="card-header bg-transparent border-0 pt-4 px-4">
-                            <h6 className="fw-semibold mb-0">Recent Contributions</h6>
+                    <div className="card cp-panel h-100 border-0">
+                        <div className="card-header border-0 bg-transparent px-4 pt-4">
+                            <h6 className="fw-semibold mb-0">
+                                Recent Contributions
+                            </h6>
                         </div>
                         <div className="card-body pt-0">
                             <DataTable
                                 searchable={false}
                                 data={recentContributions}
                                 columns={[
-                                    { key: 'date', label: 'Date', render: (r) => formatDate(r.date) },
-                                    { key: 'member', label: 'Member', render: (r) => r.member?.full_name ?? '—' },
-                                    { key: 'amount', label: 'Amount', render: (r) => formatCurrency(Number(r.amount)) },
+                                    {
+                                        key: 'date',
+                                        label: 'Date',
+                                        render: (r) => formatDate(r.date),
+                                    },
+                                    {
+                                        key: 'member',
+                                        label: 'Member',
+                                        render: (r) =>
+                                            r.member?.full_name ?? '—',
+                                    },
+                                    {
+                                        key: 'amount',
+                                        label: 'Amount',
+                                        render: (r) =>
+                                            formatCurrency(Number(r.amount)),
+                                    },
                                 ]}
                             />
                         </div>

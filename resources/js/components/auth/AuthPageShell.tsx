@@ -7,7 +7,12 @@ type Props = {
     footer?: ReactNode;
 };
 
-export default function AuthPageShell({ title, description, children, footer }: Props) {
+export default function AuthPageShell({
+    title,
+    description,
+    children,
+    footer,
+}: Props) {
     return (
         <div className="cp-auth-panel">
             <div className="cp-auth-panel__header">
